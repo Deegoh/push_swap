@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   rules_a.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/20 20:38:14 by tpinto-m         ###   ########.fr       */
+/*   Created: 2022/01/19 11:41:59 by tpinto-m          #+#    #+#             */
+/*   Updated: 2022/01/19 12:44:51 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char *av[])
+void	swap(char *stack)
 {
-	char	*a;
-	char	*tmp;
-	int		i;
+	(void)stack;
+}
 
-	i = 0;
-	if (ac == 1)
-	{
-		ft_putstr_fd("usage: ./push_swap [arg]\n", 1);
-		return (1);
-	}
-	a = ft_calloc(1, sizeof(char));
-	while (++i < ac)
-	{
-		tmp = a;
-		a = ft_strjoin(a, av[i]);
-		free(tmp);
-		tmp = a;
-		a = ft_strjoin(a, " ");
-		free(tmp);
-	}
-	return (0);
+void	push(char *stack)
+{
+	(void)stack;
+}
+
+void	rotate(char *stack)
+{
+	(void)stack;
+}
+
+void	r_rotate(char *stack)
+{
+	(void)stack;
 }
