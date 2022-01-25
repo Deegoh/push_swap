@@ -2,7 +2,7 @@
 NAME = ps
 CHECKER = checker_mac
 CC = cc
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -g
 SRC = push_swap.c\
 	  rules_single.c
 RM = rm -f
