@@ -14,9 +14,9 @@
 # define PUSH_SWAP_H
 # include "libft.h"
 
-void	swap(char ***stack, char *print);
-void	push(char ***stack_a, char ***stack_b, char *print);
-void	rotate(char ***stack, char *print);
-void	r_rotate(char ***stack, char *print);
+void	swap(int **stack, char *print);
+void	push(int **stack_a, int **stack_b, int len, char *print);
+void	rotate(int **stack, char *print);
+void	r_rotate(int **stack, char *print);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/25 20:45:55 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/26 20:42:34 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,29 @@ void	error_exit(void)
 	exit (1);
 }
 
-void	find_dup(char	**stack_a)
+void	find_dup(int	*stack_a, int len)
 {
 	int	i;
 	int	j;
-	int	len;
 
 	i = -1;
-	while (stack_a[++i])
+	while (++i < len)
 	{
 		j = i;
-		while (stack_a[++j])
-		{
-			if (ft_strlen(stack_a[i]) < ft_strlen(stack_a[j]))
-				len = ft_strlen(stack_a[j]);
-			else
-				len = ft_strlen(stack_a[i]);
-			if (ft_strncmp(stack_a[i], stack_a[j], len) == 0)
+		while (++j < len)
+			if (stack_a[i] == stack_a[j])
 				error_exit();
-		}
 	}
+}
+
+int	arrlen(char **arr)
+{
+	int	count;
+
+	count = 0;
+	while (arr[count])
+		count++;
+	return (count);
 }
 
 char	*merge_arg(char **arg, int ac)
@@ -62,24 +65,46 @@ char	*merge_arg(char **arg, int ac)
 	return (ret);
 }
 
+int	*split_to_arr(char **split, int len)
+{
+	int	*stack;
+	int	i;
+
+	stack = ft_calloc(sizeof(stack), len);
+	i = -1;
+	while (++i < len)
+		stack[i] = ft_atoi(split[i]);
+	return (stack);
+}
+
 int	main(int ac, char *av[])
 {
 	char	*arg;
-	char	**stack_a;
-	char	**stack_b;
+	int		len;
+	char	**split;
+	int		*stack_a;
+	int		*stack_b;
 	int		i;
 
 	if (ac == 1)
 		error_exit();
 	arg = merge_arg(av, ac);
-	stack_a = ft_split(arg, ' ');
-	find_dup(stack_a);
-	swap(&stack_a, "");
-	push(&stack_a, &stack_b, "");
+	split = ft_split(arg, ' ');
+	len = arrlen(split);
+	stack_a = split_to_arr(split, len);
+	find_dup(stack_a, len);
+	stack_b = ft_calloc(sizeof(stack_b), len);
+	swap(&stack_a, "sa\n");
+	push(&stack_b, &stack_a, len, "pb\n");
+	push(&stack_b, &stack_a, len, "pb\n");
+//	push(&split, &stack_b, "");
 	i = 0;
-	while (stack_a[i])
-		if (stack_a[i])
-			ft_printf("%s\n", (stack_a[i++]));
-	printf(":)\n");
+	printf("len:%d\n", len);
+	while (i < len)
+	{
+		ft_printf("i:%d a:%d ", i, (stack_a[i]));
+		ft_printf("b:%d\n", (stack_b[i++]));
+	}
+//	printf(":)\n");
 	return (0);
 }
