@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/26 20:42:34 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/27 07:41:57 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,31 +80,40 @@ int	*split_to_arr(char **split, int len)
 int	main(int ac, char *av[])
 {
 	char	*arg;
-	int		len;
 	char	**split;
-	int		*stack_a;
-	int		*stack_b;
 	int		i;
+	t_stack	stacks;
 
 	if (ac == 1)
 		error_exit();
+	// init stack
 	arg = merge_arg(av, ac);
 	split = ft_split(arg, ' ');
-	len = arrlen(split);
-	stack_a = split_to_arr(split, len);
-	find_dup(stack_a, len);
-	stack_b = ft_calloc(sizeof(stack_b), len);
-	swap(&stack_a, "sa\n");
-	push(&stack_b, &stack_a, len, "pb\n");
-	push(&stack_b, &stack_a, len, "pb\n");
-//	push(&split, &stack_b, "");
+	stacks.sizemax = arrlen(split);
+	stacks.a = split_to_arr(split, stacks.sizemax);
+	stacks.size_a = stacks.sizemax;
+	find_dup(stacks.a, stacks.size_a);
+	stacks.b = ft_calloc(sizeof(stacks.b), stacks.sizemax);
+	stacks.size_b = 0;
+	// solve (test)
+//	push_b(&stacks);
+//	push_b(&stacks);
+//	swap(&stacks.b, "sb\n");
+//	push_a(&stacks);
+	// print stacks (test)
 	i = 0;
-	printf("len:%d\n", len);
-	while (i < len)
+	printf("\nstacks\n");
+	while (i < stacks.sizemax)
 	{
-		ft_printf("i:%d a:%d ", i, (stack_a[i]));
-		ft_printf("b:%d\n", (stack_b[i++]));
+		if (i < stacks.size_a)
+			ft_printf("a:%d ", stacks.a[i]);
+		else
+			ft_printf("a:  ");
+		if (i < stacks.size_b)
+			ft_printf("b:%d\n", stacks.b[i]);
+		else
+			ft_printf("b:  \n");
+		i++;
 	}
-//	printf(":)\n");
 	return (0);
 }
