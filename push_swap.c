@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/27 08:22:10 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:25:46 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	main(int ac, char *av[])
 //	push_b(&stacks);
 //	swap(&stacks.a, "sa\n");
 //	push_a(&stacks);
+//	rotate(&stacks.a, "ra\n");
+	r_rotate(&stacks.a, "rra\n");
 	// print stacks (test)
 	i = 0;
 	printf("\nstacks\n");

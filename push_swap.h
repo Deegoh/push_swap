@@ -31,6 +31,6 @@ void	swap(t_stack *stack, char *print);
 void	push_b(t_stacks *stacks);
 void	push_a(t_stacks *stacks);
 void	rotate(t_stack *stacks, char *print);
-void	r_rotate(int **stack, char *print);
+void	r_rotate(t_stack *stack, char *print);
 
 #endif

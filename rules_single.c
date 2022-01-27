@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:41:59 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/27 08:17:52 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:36:16 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,40 @@ rotate a/b - shift up all elements of stack by 1.
 The first element becomes the last one.
  */
 
-void	rotate(t_stack *stacks, char *print)
+void	rotate(t_stack *stack, char *print)
 {
-	(void)stacks;
-	if (print)
-		ft_putstr_fd(print, 1);
-//	int	tmp;
-//	int	i;
-//
-//	if (stack[0][0])
-//	{
-//		i = -1;
-//		tmp = stack[0][0];
-//		while (++i < s)
-//		stack[0][0] = stack[0][1];
-//		stack[0][1] = tmp;
-//		if (print)
-//			ft_putstr_fd(print, 1);
-//	}
-}
+	int	tmp;
+	int	i;
 
-void	r_rotate(int **stack, char *print)
+	if (stack->size > 1)
+	{
+		i = 0;
+		tmp = stack->value[i];
+		while (++i < stack->size)
+			stack->value[i - 1] = stack->value[i];
+		stack->value[i - 1] = tmp;
+		if (print)
+			ft_putstr_fd(print, 1);
+	}
+}
+/*
+reverse rotate a/b - shift down all elements of stack by 1.
+The last element becomes the first one.
+ */
+
+void	r_rotate(t_stack *stack, char *print)
 {
-	(void)stack;
-	if (print)
-		ft_putstr_fd(print, 1);
+	int	tmp;
+	int	i;
+
+	if (stack->size > 1)
+	{
+		i = stack->size;
+		tmp = stack->value[i - 1];
+		while (--i)
+			stack->value[i] = stack->value[i - 1];
+		stack->value[0] = tmp;
+		if (print)
+			ft_putstr_fd(print, 1);
+	}
 }
