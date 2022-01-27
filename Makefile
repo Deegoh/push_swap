@@ -4,7 +4,8 @@ CHECKER = checker_mac
 CC = cc
 CFLAGS = -Werror -Wall -Wextra -g
 SRC = push_swap.c\
-	  rules_single.c
+	  rules_single.c\
+	  rules_double.c
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
