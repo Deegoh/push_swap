@@ -6,13 +6,13 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:15:21 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/28 13:32:17 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:30:28 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	find_dup(int	*stack_a, int len)
+static void	find_dup(int	*stack_a, int len)
 {
 	int	i;
 	int	j;
@@ -27,7 +27,7 @@ void	find_dup(int	*stack_a, int len)
 	}
 }
 
-int	arrlen(char **arr)
+static int	arrlen(char **arr)
 {
 	int	count;
 
@@ -37,7 +37,7 @@ int	arrlen(char **arr)
 	return (count);
 }
 
-char	*merge_arg(char **arg, int ac)
+static char	*merge_arg(char **arg, int ac)
 {
 	char	*ret;
 	char	*tmp;
@@ -59,7 +59,7 @@ char	*merge_arg(char **arg, int ac)
 	return (ret);
 }
 
-int	*split_to_arr(char **split, int len)
+static int	*split_to_arr(char **split, int len)
 {
 	int	*stack;
 	int	i;
