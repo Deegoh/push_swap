@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/28 13:33:42 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:26:37 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,72 @@ int	main(int ac, char *av[])
 		error_exit();
 	stacks = init_stacks(ac, av);
 	// solve (test)
+	int	i;
+
+	i = -1;
+	while (++i < stacks.sizemax)
+	{
+		if (i % 2 == 0)
+		{
+			while (!stacks.a.size)
+			{
+				int t = s1.top();
+				s1.pop();
+				if (s2.empty())
+				{
+					s2.push(t);
+				}
+				else
+				{
+					// Swapping
+					if (s2.top() > t)
+					{
+						int temp = s2.top();
+						s2.pop();
+						s2.push(t);
+						s2.push(temp);
+					}
+					else
+					{
+						s2.push(t);
+					}
+				}
+			}
+			// Tricky step
+			a[n - 1 - i] = s2.top();
+			s2.pop();
+		}
+		else
+		{
+			while (!s2.empty())
+			{
+				int t = s2.top();
+				s2.pop();
+				if (s1.empty())
+				{
+					s1.push(t);
+				}
+				else
+				{
+					if (s1.top() > t)
+					{
+						int temp = s1.top();
+						s1.pop();
+						s1.push(t);
+						s1.push(temp);
+					}
+					else
+					{
+						s1.push(t);
+					}
+				}
+			}
+			// Tricky step
+			a[n - 1 - i] = s1.top();
+			s1.pop();
+		}
+	}
+	// print stacks
 	print_stacks(stacks);
 	return (0);
 }
