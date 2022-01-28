@@ -1,6 +1,5 @@
-#NAME = push_swap
-NAME = ps
-CHECKER = checker_mac
+NAME = push_swap
+CHECKER = checker_Mac
 CC = cc
 CFLAGS = -Werror -Wall -Wextra -g
 SRC = push_swap.c\
@@ -11,7 +10,7 @@ RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L $(LIBFT_DIR)
-ARG=`ruby -e "puts (-200..200).to_a.shuffle.join(' ')"`
+ARG=`ruby -e "puts (-10..10).to_a.shuffle.join(' ')"`
 
 .PHONY: all clean fclean re libft
 
@@ -29,6 +28,6 @@ fclean: clean
 re: fclean all
 
 visu: re
-	python3 pyviz.py $ARG
+	./pyviz.py $(ARG)
 checker: re
-	./$(NAME) $ARG | ./$(CHECKER) $ARG
+	./$(NAME) $(ARG) | ./$(CHECKER) $(ARG)

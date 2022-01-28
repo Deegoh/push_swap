@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/28 16:26:37 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/28 20:27:13 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,71 +47,63 @@ int	main(int ac, char *av[])
 		error_exit();
 	stacks = init_stacks(ac, av);
 	// solve (test)
+
 	int	i;
+	int	t;
 
 	i = -1;
 	while (++i < stacks.sizemax)
 	{
 		if (i % 2 == 0)
 		{
-			while (!stacks.a.size)
+			while (stacks.a.size != 0)
 			{
-				int t = s1.top();
-				s1.pop();
-				if (s2.empty())
+				t = stacks.a.value[0];
+				if (stacks.b.size == 0)
 				{
-					s2.push(t);
+					push_b(&stacks);
 				}
 				else
 				{
-					// Swapping
-					if (s2.top() > t)
+					if (stacks.b.value[0] > t)
 					{
-						int temp = s2.top();
-						s2.pop();
-						s2.push(t);
-						s2.push(temp);
+						push_b(&stacks);
+						swap(&stacks.b, "sb\n");
 					}
 					else
 					{
-						s2.push(t);
+						push_b(&stacks);
 					}
 				}
 			}
-			// Tricky step
-			a[n - 1 - i] = s2.top();
-			s2.pop();
 		}
 		else
 		{
-			while (!s2.empty())
+			while (!stacks.b.size)
 			{
-				int t = s2.top();
-				s2.pop();
-				if (s1.empty())
+				t = stacks.b.value[0];
+				if (stacks.a.size == 0)
 				{
-					s1.push(t);
+					push_a(&stacks);
 				}
 				else
 				{
-					if (s1.top() > t)
+					if (stacks.a.value[0] > t)
 					{
-						int temp = s1.top();
-						s1.pop();
-						s1.push(t);
-						s1.push(temp);
+						push_a(&stacks);
+						swap(&stacks.a, "sa\n");
 					}
 					else
 					{
-						s1.push(t);
+						push_a(&stacks);
 					}
 				}
 			}
-			// Tricky step
-			a[n - 1 - i] = s1.top();
-			s1.pop();
 		}
 	}
+	i = 0;
+	while (i++ < stacks.sizemax)
+		push_a(&stacks);
 	// print stacks
 	print_stacks(stacks);
 	return (0);
