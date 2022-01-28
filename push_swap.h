@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/27 11:43:59 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/01/28 13:25:24 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ typedef struct s_stacks
 	t_stack	a;
 	t_stack	b;
 }			t_stacks;
+
+void	error_exit(void);
+
+t_stacks	init_stacks(int ac, char *av[]);
 
 void	swap(t_stack *stack, char *print);
 void	push_b(t_stacks *stacks);
