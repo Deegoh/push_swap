@@ -73,10 +73,10 @@ int	*split_to_arr(char **split, int len)
 
 t_stacks	init_stacks(int ac, char *av[])
 {
-	char	*arg;
-	char	**split;
+	char		*arg;
+	char		**split;
 	t_stacks	stacks;
-	int		i;
+	int			i;
 
 	arg = merge_arg(av, ac);
 	split = ft_split(arg, ' ');
