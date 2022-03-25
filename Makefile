@@ -10,7 +10,7 @@ RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L $(LIBFT_DIR)
-ARG=`ruby -e "puts (-10..10).to_a.shuffle.join(' ')"`
+ARG=`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`
 
 .PHONY: all clean fclean re libft
 
@@ -27,7 +27,9 @@ fclean: clean
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
 re: fclean all
 
-visu: re
+v1: all
 	./pyviz.py $(ARG)
-checker: re
+v2: all
+	./push_swap_visualizer2.py $(ARG)
+checker: all
 	./$(NAME) $(ARG) | ./$(CHECKER) $(ARG)
