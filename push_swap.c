@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/02/01 13:01:23 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/03/28 18:49:10 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,94 +40,65 @@ void	print_stacks(t_stacks stacks)
 	}
 }
 
-void	check_sort(t_stacks	stacks)
+int	check_sort(t_stacks	stacks)
 {
 	int	i;
 
 	i = 0;
-	while (++i < stacks.sizemax - 1)
+	while (++i < stacks.sizemax)
 	{
 		if (stacks.a.value[i - 1] < stacks.a.value[i])
-			i++;
-		else
-			return ;
-		if (i == stacks.sizemax - 2)
-		{
-			printf("fini\n");
-			exit(0);
-		}
+			continue ;
+		return(1);
 	}
+	print_stacks(stacks);
+	exit(EXIT_SUCCESS);
 }
 
 //TODO gerer le 0
+void bubbleSort(t_stacks *stacks)
+{
+	// while(check_sort(*stacks))
+	// {
+
+	// }
+	(void)stacks;
+	return;
+}
+
+void sort3(t_stacks *stacks)
+{
+	if (stacks->a.value[0] > stacks->a.value[1])
+		swap(&stacks->a, "sa\n");
+	check_sort(*stacks);
+	if (stacks->a.value[0] < stacks->a.value[1])
+		push_b(stacks);
+	else
+	{
+		swap(&stacks->a, "sa\n");
+		push_b(stacks);
+	}
+	check_sort(*stacks);
+	swap(&stacks->a, "sa\n");
+	push_a(stacks);
+	check_sort(*stacks);
+	if (stacks->a.value[0] > stacks->a.value[1])
+		swap(&stacks->a, "sa\n");
+	check_sort(*stacks);
+}
 
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
-	int			i;
-	int			t;
 
 	if (ac == 1)
 		error_exit();
 	stacks = init_stacks(ac, av);
-	// solve (test)
-	i = -1;
-	while (++i < stacks.sizemax)
-	{
-		check_sort(stacks);
-		if (i % 2 == 0)
-		{
-			while (stacks.a.size != 0)
-			{
-				t = stacks.a.value[0];
-				if (stacks.b.size == 0)
-				{
-					push_b(&stacks);
-				}
-				else
-				{
-					if (stacks.b.value[0] > t)
-					{
-						push_b(&stacks);
-						swap(&stacks.b, "sb\n");
-					}
-					else
-					{
-						push_b(&stacks);
-					}
-				}
-			}
-		}
-		else
-		{
-			while (!stacks.b.size)
-			{
-				t = stacks.b.value[0];
-				if (stacks.a.size == 0)
-				{
-					push_a(&stacks);
-				}
-				else
-				{
-					if (stacks.a.value[0] > t)
-					{
-						push_a(&stacks);
-						swap(&stacks.a, "sa\n");
-					}
-					else
-					{
-						push_a(&stacks);
-					}
-				}
-			}
-		}
-		check_sort(stacks);
-	}
-	i = 0;
-	while (i++ < stacks.sizemax)
-		push_a(&stacks);
 	check_sort(stacks);
+	if (stacks.sizemax <= 3)
+		sort3(&stacks);
+
 	// print stacks
-	print_stacks(stacks);
-	return (0);
+	// print_stacks(stacks);
+	return(0);
 }

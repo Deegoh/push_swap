@@ -6,18 +6,20 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/01/28 13:25:24 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/03/28 18:26:12 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include "libft.h"
+# include "libft/ft_printf.h"
+# include "libft/libft.h"
 
 typedef struct s_stack
 {
 	int	size;
 	int	*value;
+	//int	index;
 }		t_stack;
 
 typedef struct s_stacks
