@@ -6,13 +6,12 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/28 18:26:12 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:11:11 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include "libft/ft_printf.h"
 # include "libft/libft.h"
 
 typedef struct s_stack
@@ -29,17 +28,21 @@ typedef struct s_stacks
 	t_stack	b;
 }			t_stacks;
 
-void	error_exit(void);
+void		error_exit(void);
 
 t_stacks	init_stacks(int ac, char *av[]);
 
-void	swap(t_stack *stack, char *print);
-void	push_b(t_stacks *stacks);
-void	push_a(t_stacks *stacks);
-void	rotate(t_stack *stacks, char *print);
-void	r_rotate(t_stack *stack, char *print);
-void	d_swap(t_stacks *stacks);
-void	d_rotate(t_stacks *stacks);
-void	d_r_rotate(t_stacks *stacks);
+void		swap(t_stack *stack, char *print);
+void		push_b(t_stacks *stacks);
+void		push_a(t_stacks *stacks);
+void		rotate(t_stack *stacks, char *print);
+void		r_rotate(t_stack *stack, char *print);
+void		d_swap(t_stacks *stacks);
+void		d_rotate(t_stacks *stacks);
+void		d_r_rotate(t_stacks *stacks);
+
+int			check_sort(t_stacks	stacks);
+void		sort2(t_stacks *stacks);
+void		sort3(t_stacks *stacks);
 
 #endif

@@ -6,7 +6,8 @@ CFLAGS = -Werror -Wall -Wextra -g
 SRC = push_swap.c\
 	  rules_single.c\
 	  rules_double.c\
-	  parse_arg.c
+	  parse_arg.c\
+	  simple_sort.c
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
