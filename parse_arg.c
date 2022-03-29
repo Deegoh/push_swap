@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:15:21 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/25 13:28:30 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/03/28 16:44:11 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	*split_to_arr(char **split, int len)
 	return (stack);
 }
 
-t_stacks	init_stacks(int ac, char *av[])
+t_stacks	init_stacks(int ac, char **av)
 {
 	char		*arg;
 	char		**split;

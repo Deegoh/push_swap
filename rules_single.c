@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:41:59 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/25 17:27:29 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/03/29 23:51:37 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	swap(t_stack *stack, char *print)
 {
 	int	tmp;
 
-	if (stack->value[1])
+	if (stack->size > 1)
 	{
 		tmp = stack->value[0];
 		stack->value[0] = stack->value[1];
@@ -39,7 +39,7 @@ void	push_a(t_stacks *stacks)
 {
 	int	i;
 
-	if (stacks->b.value[0])
+	if (stacks->b.size > 0)
 	{
 		stacks->a.size++;
 		i = stacks->a.size;
@@ -63,7 +63,7 @@ void	push_b(t_stacks *stacks)
 {
 	int	i;
 
-	if (stacks->a.value[0])
+	if (stacks->a.size > 0)
 	{
 		stacks->b.size++;
 		i = stacks->b.size;
@@ -79,7 +79,7 @@ void	push_b(t_stacks *stacks)
 	}
 }
 
-/*
+/**
 rotate a/b - shift up all elements of stack by 1.
 The first element becomes the last one.
 @print ra or rb

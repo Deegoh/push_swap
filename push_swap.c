@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/29 16:46:42 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/03/29 23:53:58 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	check_sort(t_stacks	stacks)
 	exit(EXIT_SUCCESS);
 }
 
-//TODO gerer le 0
 void bubbleSort(t_stacks *stacks)
 {
 	// while(check_sort(*stacks))
