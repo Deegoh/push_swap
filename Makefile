@@ -14,7 +14,7 @@ INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`
 OBJ = $(SRC:.c=.o)
-ARG1= 90 68 14 34 99 72 15 11 66 37 46 31 55 3 28 100 8 61 24 19
+ARG1= 90 68 14 34 99
 
 .PHONY: all clean fclean re libft
 
@@ -32,7 +32,7 @@ fclean: clean
 re: fclean all
 
 v1: all
-	./pyviz.py $(ARG)
+	./pyviz.py $(ARG1)
 v2: all
 	./push_swap_visualizer2.py $(ARG)
 checker: all

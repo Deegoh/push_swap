@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/29 23:53:58 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/03/30 14:24:37 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,10 @@ int	check_sort(t_stacks	stacks)
 			continue ;
 		return (1);
 	}
-	print_stacks(stacks);
+	// print_stacks(stacks);
 	exit(EXIT_SUCCESS);
 }
-
-void bubbleSort(t_stacks *stacks)
-{
-	// while(check_sort(*stacks))
-	// {
-
-	// }
-	(void)stacks;
-	return ;
-}
-
+//TODO gerer intmax
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
@@ -74,9 +64,11 @@ int	main(int ac, char *av[])
 	stacks = init_stacks(ac, av);
 	check_sort(stacks);
 	if (stacks.sizemax == 2)
-		sort2(&stacks);
+		sort2(&stacks.a);
 	else if (stacks.sizemax == 3)
-		sort3(&stacks);
+		sort3(&stacks.a);
+	else if (stacks.sizemax <= 5)
+		sort5(&stacks);
 
 	// print stacks
 	// print_stacks(stacks);
