@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/30 11:40:01 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:45:26 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void		r_rotate(t_stack *stack, char *print);
 void		d_swap(t_stacks *stacks);
 void		d_rotate(t_stacks *stacks);
 void		d_r_rotate(t_stacks *stacks);
+
+void		check_rule(t_stacks *stacks, char *str);
+void		do_rule_nb(t_stacks *stacks, char *str, int nb);
+void		opti_rot(t_stacks *stacks, int value);
 
 int			check_sort(t_stacks	stacks);
 void		sort2(t_stack *stack);

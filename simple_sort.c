@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/30 14:48:31 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/11 13:46:50 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,21 @@ void	sort5(t_stacks *stacks)
 	int	avant;
 	int	i;
 
-	i = 0;
-	max = stacks->a.value[i];
-	avant = stacks->a.value[i];
-	while (i++ < stacks->a.size)
+	i = -1;
+	max = stacks->a.value[0];
+	avant = stacks->a.value[0];
+	while (++i < stacks->a.size)
 	{
-		if (avant < max && stacks->a.value[i] > avant)
-			avant = stacks->a.value[i];
-		if (stacks->a.value[i] > max)
+		if (stacks->a.value[i] < max)
+		{
+			avant = max;
 			max = stacks->a.value[i];
+		}
 	}
-	while (avant != stacks->a.value[0])
-		rotate(&stacks->a, "ra\n");
+	opti_rot(stacks, max);
 	push_b(stacks);
-	while (max != stacks->a.value[0])
-		rotate(&stacks->a, "ra\n");
+	opti_rot(stacks, avant);
 	push_b(stacks);
 	sort3(&stacks->a);
-	push_a(stacks);
-	push_a(stacks);
-	rotate(&stacks->a, "ra\n");
-	rotate(&stacks->a, "ra\n");
+	do_rule_nb(stacks, "PA", 2);
 }

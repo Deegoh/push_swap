@@ -2,12 +2,13 @@ NAME = push_swap
 CHECKER = checker_Mac
 CHECKER = checker_linux
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g
+CFLAGS = -Werror -Wall -Wextra -g -fsanitize=address
 SRC = push_swap.c\
 	  rules_single.c\
 	  rules_double.c\
 	  parse_arg.c\
-	  simple_sort.c
+	  simple_sort.c\
+	  rules_utils.c
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
