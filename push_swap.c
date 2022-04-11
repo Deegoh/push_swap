@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/11 13:25:07 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:29:56 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ int	check_sort(t_stacks	stacks)
 			continue ;
 		return (1);
 	}
-	// print_stacks(stacks);
 	exit(EXIT_SUCCESS);
 }
-//TODO gerer intmax
 
 // A utility function to print contents of arr
 void	print_arr(int arr[], int n)
@@ -121,7 +119,7 @@ int	partition(int	arr[], int	l, int	h, int	maxarr)
 /* A[] --> Array to be sorted,
    l  --> Starting index,
    h  --> Ending index */
-void quickSortIterative(int arr[], int l, int h, int maxarr)
+void quicksort_ite(int arr[], int l, int h, int maxarr)
 {
 	printf("quick: l[%d] h[%d]\n      ", l, h);
 	print_arr(arr, h);
@@ -164,15 +162,6 @@ void quickSortIterative(int arr[], int l, int h, int maxarr)
 	}
 }
 
-// Driver program to test above functions
-// int main()
-// {
-//     int arr[] = { 4, 3, 5, 2, 1, 3, 2, 3 };
-//     int n = sizeof(arr) / sizeof(*arr);
-//     quickSortIterative(arr, 0, n - 1);
-//     return 0;
-// }
-
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
@@ -185,12 +174,12 @@ int	main(int ac, char *av[])
 		sort2(&stacks.a);
 	else if (stacks.sizemax == 3)
 		sort3(&stacks.a);
-	else if (stacks.sizemax <= 5)
+	else if (stacks.sizemax == 4)
+		sort4(&stacks);
+	else if (stacks.sizemax == 5)
 		sort5(&stacks);
-	// printArr(stacks.a.value, stacks.a.size - 1);
-	// quickSortIterative(stacks.a.value, 0, stacks.a.size - 1, stacks.a.size - 1);
-
-	// print stacks
+	else
+		quicksort_ite(stacks.a.value, 0, stacks.a.size - 1, stacks.a.size - 1);
 	print_stacks(stacks);
 	return (0);
 }

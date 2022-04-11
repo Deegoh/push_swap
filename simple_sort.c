@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/11 13:46:50 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:00:05 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ void	sort3(t_stack *stack)
 		r_rotate(stack, "rra\n");
 }
 
+void	sort4(t_stacks *stacks)
+{
+	int	max;
+	int	i;
+
+	i = -1;
+	max = stacks->a.value[0];
+	while (++i < stacks->a.size)
+		if (stacks->a.value[i] < max)
+			max = stacks->a.value[i];
+	opti_rot(stacks, max);
+	push_b(stacks);
+	sort3(&stacks->a);
+	push_a(stacks);
+}
+
 void	sort5(t_stacks *stacks)
 {
 	int	max;
@@ -53,15 +69,14 @@ void	sort5(t_stacks *stacks)
 
 	i = -1;
 	max = stacks->a.value[0];
-	avant = stacks->a.value[0];
+	avant = stacks->a.value[1];
 	while (++i < stacks->a.size)
-	{
 		if (stacks->a.value[i] < max)
-		{
-			avant = max;
 			max = stacks->a.value[i];
-		}
-	}
+	while (--i)
+		if (stacks->a.value[i] < avant && stacks->a.value[i] > max)
+			avant = stacks->a.value[i];
+	// printf("max%d avant%d\n", max, avant);
 	opti_rot(stacks, max);
 	push_b(stacks);
 	opti_rot(stacks, avant);

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:15:21 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/28 16:44:11 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/11 15:28:35 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ static int	*split_to_arr(char **split, int len)
 	stack = ft_calloc(sizeof(stack), len);
 	i = -1;
 	while (++i < len)
+	{
+		if (ft_atol(split[i]) > INT_MAX || ft_atol(split[i]) < INT_MIN)
+			error_exit();
 		stack[i] = ft_atoi(split[i]);
+	}
 	return (stack);
 }
 
