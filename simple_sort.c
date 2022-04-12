@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/11 15:00:05 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:47:02 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,16 @@ void	sort5(t_stacks *stacks)
 	push_b(stacks);
 	sort3(&stacks->a);
 	do_rule_nb(stacks, "PA", 2);
+}
+
+void	simple_sort(t_stacks *stacks)
+{
+	if (stacks->sizemax == 2)
+		sort2(&stacks->a);
+	else if (stacks->sizemax == 3)
+		sort3(&stacks->a);
+	else if (stacks->sizemax == 4)
+		sort4(stacks);
+	else if (stacks->sizemax == 5)
+		sort5(stacks);
 }

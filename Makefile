@@ -8,7 +8,10 @@ SRC = push_swap.c\
 	  rules_double.c\
 	  parse_arg.c\
 	  simple_sort.c\
-	  rules_utils.c
+	  rules_utils.c\
+	  quick_sort.c\
+	  sort_stack.c\
+	  print_utils.c
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)

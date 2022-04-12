@@ -6,180 +6,45 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/11 15:29:56 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/12 16:23:35 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	error_exit(void)
+void	swappp(t_stacks *stacks, int i, int j)
 {
-	ft_putstr_fd("Error\n", 1);
-	exit (EXIT_FAILURE);
-}
+	int	max;
 
-void	print_stacks(t_stacks stacks)
-{
-	int		i;
-
-	i = 0;
-	printf("\nstacks\n");
-	printf("sizemax:%d\n", stacks.sizemax);
-	printf("s_a:%d s_b:%d\n", stacks.a.size, stacks.b.size);
-	while (i < stacks.sizemax)
-	{
-		if (i < stacks.a.size)
-			ft_printf("a:%d ", stacks.a.value[i]);
-		else
-			ft_printf("a:  ");
-		if (i < stacks.b.size)
-			ft_printf("b:%d\n", stacks.b.value[i]);
-		else
-			ft_printf("b:\n");
-		i++;
-	}
-}
-
-int	check_sort(t_stacks	stacks)
-{
-	int	i;
-
-	i = 0;
-	while (++i < stacks.sizemax)
-	{
-		if (stacks.a.value[i - 1] < stacks.a.value[i])
-			continue ;
-		return (1);
-	}
-	exit(EXIT_SUCCESS);
-}
-
-// A utility function to print contents of arr
-void	print_arr(int arr[], int n)
-{
-	int	i;
-
-	i = -1;
-	while (i++ < n)
-	{
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
-}
-
-// A utility function to swap two elements
-void	swapp(int	*a, int	*b)
-{
-	int	t;
-
-	t = *a;
-	*a = *b;
-	*b = t;
-	printf("swapp(%d, %d)\n", *a, *b);
-}
-
-/* This function is same in both iterative and recursive*/
-int	partition(int	arr[], int	l, int	h, int	maxarr)
-{
-	int	x;
-	int	i;
-	int	j;
-
-	x = arr[h];
-	i = (l - 1);
-	j = l;
-	while (j <= h - 1)
-	{
-		if (arr[j] <= x)
-		{
-			i++;
-			if (&arr[i] != &arr[j])
-			{
-				printf("avant:");
-				print_arr(arr, maxarr);
-				swapp(&arr[i], &arr[j]);
-				printf("apres:");
-				print_arr(arr, maxarr);
-			}
-		}
-		j++;
-	}
-	if (&arr[i + 1] != &arr[h])
-	{
-		printf("avant:");
-		print_arr(arr, maxarr);
-		swapp(&arr[i + 1], &arr[h]);
-		printf("apres:");
-		print_arr(arr, maxarr);
-		printf("%d[%d] = partition(l[%d], h[%d])\n", i + 1, arr[i + 1], l, h);
-	}
-	return (i + 1);
-}
-
-/* A[] --> Array to be sorted,
-   l  --> Starting index,
-   h  --> Ending index */
-void quicksort_ite(int arr[], int l, int h, int maxarr)
-{
-	printf("quick: l[%d] h[%d]\n      ", l, h);
-	print_arr(arr, h);
-	// Create an auxiliary stack
-	int stack[h - l + 1];
-
-	// initialize top of stack
-	int top = -1;
-
-	// push initial values of l and h to stack
-	stack[++top] = l;
-	stack[++top] = h;
-
-	// Keep popping from stack while is not empty
-	while (top >= 0)
-	{
-		// Pop h and l
-		h = stack[top--];
-		l = stack[top--];
-
-		// Set pivot element at its correct position
-		// in sorted array
-		int p = partition(arr, l, h, maxarr);
-		printf("quick: p[%d]\n", p);
-		// If there are elements on left side of pivot,
-		// then push left side to stack
-		if (p - 1 > l)
-		{
-			stack[++top] = l;
-			stack[++top] = p - 1;
-		}
-		
-		// If there are elements on right side of pivot,
-		// then push right side to stack
-		if (p + 1 < h)
-		{
-			stack[++top] = p + 1;
-			stack[++top] = h;
-		}
-	}
+	max = stacks->a.size - 1;
+	opti_rot(stacks, stacks->a.value[i]);
+	push_b(stacks);
+	j = j - i - 1;
+	opti_rot(stacks, stacks->a.value[j]);
+	push_b(stacks);
+	rotate(&stacks->b, "pb\n");
+	push_a(stacks);
+	opti_rot(stacks, stacks->a.value[j + i]);
+	push_a(stacks);
+	opti_rot(stacks, stacks->a.value[max]);
 }
 
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
+	// t_stacks	stacks2;
 
 	if (ac == 1)
 		error_exit();
 	stacks = init_stacks(ac, av);
+	// stacks2 = init_stacks(ac, av);
 	check_sort(stacks);
-	if (stacks.sizemax == 2)
-		sort2(&stacks.a);
-	else if (stacks.sizemax == 3)
-		sort3(&stacks.a);
-	else if (stacks.sizemax == 4)
-		sort4(&stacks);
-	else if (stacks.sizemax == 5)
-		sort5(&stacks);
+	if (stacks.sizemax <= 5)
+		simple_sort(&stacks);
 	else
-		quicksort_ite(stacks.a.value, 0, stacks.a.size - 1, stacks.a.size - 1);
-	print_stacks(stacks);
+		sort_stack(&stacks);
+	// quicksort_ite(&stacks, stacks.a.value, 0, stacks.a.size - 1, stacks.a.size - 1);
+	// swappp(&stacks, 1, 4);
+	// print_stacks(stacks);
 	return (0);
 }
