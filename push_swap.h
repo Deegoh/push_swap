@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/12 16:00:17 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/12 18:29:22 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		sort5(t_stacks *stacks);
 void		simple_sort(t_stacks *stacks);
 
 void		swapp(int *a, int *b);
-int			partition(t_stacks *stacks, int arr[], int l, int h, int maxarr);
+int			partition_ite(t_stacks *stacks, int arr[], int l, int h, int maxarr);
 void		quicksort_ite(t_stacks *stacks, int arr[], int l, int h, int maxarr);
 void		swappp(t_stacks *stacks, int i, int j);
 

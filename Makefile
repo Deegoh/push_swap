@@ -2,7 +2,7 @@ NAME = push_swap
 CHECKER = checker_Mac
 CHECKER = checker_linux
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra #-g -fsanitize=address
 SRC = push_swap.c\
 	  rules_single.c\
 	  rules_double.c\
