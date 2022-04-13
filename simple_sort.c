@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/12 12:47:02 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:51:31 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	sort4(t_stacks *stacks)
 	while (++i < stacks->a.size)
 		if (stacks->a.value[i] < max)
 			max = stacks->a.value[i];
-	opti_rot(stacks, max);
+	opti_rot(stacks, &stacks->a, max, 'A');
 	push_b(stacks);
 	sort3(&stacks->a);
 	push_a(stacks);
@@ -63,24 +63,25 @@ void	sort4(t_stacks *stacks)
 
 void	sort5(t_stacks *stacks)
 {
-	int	max;
-	int	avant;
+	int	top;
 	int	i;
 
 	i = -1;
-	max = stacks->a.value[0];
-	avant = stacks->a.value[1];
+	top = stacks->a.value[0];
 	while (++i < stacks->a.size)
-		if (stacks->a.value[i] < max)
-			max = stacks->a.value[i];
-	while (--i)
-		if (stacks->a.value[i] < avant && stacks->a.value[i] > max)
-			avant = stacks->a.value[i];
-	// printf("max%d avant%d\n", max, avant);
-	opti_rot(stacks, max);
+		if (stacks->a.value[i] < top)
+			top = stacks->a.value[i];
+	opti_rot(stacks, &stacks->a, top, 'A');
 	push_b(stacks);
-	opti_rot(stacks, avant);
+	// print_stacks(*stacks);
+	top = stacks->a.value[0];
+	i = -1;
+	while (++i < stacks->a.size)
+		if (stacks->a.value[i] < top)
+			top = stacks->a.value[i];
+	opti_rot(stacks, &stacks->a, top, 'A');
 	push_b(stacks);
+	// print_stacks(*stacks);
 	sort3(&stacks->a);
 	do_rule_nb(stacks, "PA", 2);
 }

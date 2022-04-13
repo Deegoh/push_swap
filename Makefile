@@ -16,7 +16,7 @@ RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
-ARG=`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`
+ARG=`ruby -e "puts (-100..100).to_a.shuffle.join(' ')"`
 OBJ = $(SRC:.c=.o)
 ARG1= 90 68 14 34 99
 
@@ -39,6 +39,9 @@ v1: all
 	./pyviz.py $(ARG1)
 v2: all
 	./push_swap_visualizer2.py $(ARG)
+test: all
+	cp $(NAME) ../push_swap_tester/.
+	bash ../push_swap_tester/tester.sh
 checker: all
-	./$(NAME) $(ARG1)
-	./$(NAME) $(ARG1) | ./$(CHECKER) $(ARG1)
+	./$(NAME) $(ARG)
+	./$(NAME) $(ARG) | ./$(CHECKER) $(ARG)

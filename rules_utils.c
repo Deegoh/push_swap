@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:47:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/11 15:28:26 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/13 14:04:01 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,35 @@ void	do_rule_nb(t_stacks *stacks, char *str, int nb)
 		check_rule(stacks, str);
 }
 
-void	opti_rot(t_stacks *stacks, int value)
+void	opti_rot(t_stacks *stacks, t_stack *stack, int value, char c)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = stacks->a.size - 1;
-	while (value != stacks->a.value[i])
+	j = stack->size - 1;
+	if (stack->size == 0)
+		return ;
+	while (value != stack->value[i] && i < stack->size - 1)
 		i++;
-	while (value != stacks->a.value[j])
+	while (value != stack->value[j] && j > 0)
 		j--;
 	if (i == 0 && j == 0)
 		return ;
-	if (i < stacks->a.size - j)
-		do_rule_nb(stacks, "RA", i);
-	else
-		do_rule_nb(stacks, "RRA", stacks->a.size - j);
+	if (c == 'A')
+	{
+		if (i < stack->size - j)
+			do_rule_nb(stacks, "RA", i);
+		else
+			do_rule_nb(stacks, "RRA", stack->size - j);
+	}
+	if (c == 'B')
+	{
+		if (i < stack->size - j)
+			do_rule_nb(stacks, "RB", i);
+		else
+			do_rule_nb(stacks, "RRB", stack->size - j);
+	}
 }
 
 long	ft_atol(const char *str)

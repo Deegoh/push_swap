@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:51:40 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/12 18:37:38 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:35:06 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,30 @@ int	partition_ite(t_stacks *stacks, int arr[], int l, int h, int maxarr)
 			i++;
 			if (&arr[i] != &arr[j])
 			{
-				printf("i[%d] j[%d]\n", i, j);
-				printf("avant:");
-				print_arr(arr, maxarr);
-				// swappp(stacks, i, j);
-				swapp(&arr[i], &arr[j]);
-				printf("apres:");
-				print_arr(arr, maxarr);
-				printf("%d[%d] = partition(l[%d], h[%d])\n", i + 1, arr[i + 1], l, h);
+				// printf("i[%d] j[%d]\n", i, j);
+				// printf("avant:");
+				// print_arr(arr, maxarr);
+				swappp(stacks, i, j);
+				// swapp(&arr[i], &arr[j]);
+				check_sort(*stacks);
+				// printf("apres:");
+				// print_arr(arr, maxarr);
+				// printf("%d[%d] = partition(l[%d], h[%d])\n", i + 1, arr[i + 1], l, h);
 			}
 		}
 		j++;
 	}
 	if (&arr[i + 1] != &arr[h])
 	{
-		printf("i + 1[%d] h[%d]\n", i + 1, h);
-		printf("avant:");
-		print_arr(arr, maxarr);
-		swapp(&arr[i + 1], &arr[h]);
-		// swappp(stacks, i + 1, h);
-		printf("apres:");
-		print_arr(arr, maxarr);
-		printf("%d[%d] = partition(l[%d], h[%d])\n", i + 1, arr[i + 1], l, h);
+		// printf("i + 1[%d] h[%d]\n", i + 1, h);
+		// printf("avant:");
+		// print_arr(arr, maxarr);
+		// swapp(&arr[i + 1], &arr[h]);
+		swappp(stacks, i + 1, h);
+		check_sort(*stacks);
+		// printf("apres:");
+		// print_arr(arr, maxarr);
+		// printf("%d[%d] = partition(l[%d], h[%d])\n", i + 1, arr[i + 1], l, h);
 	}
 	(void)stacks;
 	(void)maxarr;
@@ -73,8 +75,8 @@ int	partition_ite(t_stacks *stacks, int arr[], int l, int h, int maxarr)
    h  --> Ending index */
 void	quicksort_ite(t_stacks *stacks, int arr[], int l, int h, int maxarr)
 {
-	printf("quick: l[%d] h[%d]\n      ", l, h);
-	print_arr(arr, h);
+	// printf("quick: l[%d] h[%d]\n      ", l, h);
+	// print_arr(arr, h);
 	// Create an auxiliary stack
 	int stack[h - l + 1];
 
