@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/13 19:38:12 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:52:29 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,47 +70,53 @@ void	swappp(t_stacks *stacks, int i, int j)
 	(void)max;
 	(void)a;
 	(void)b;
-	
+}
+
+void	split_to_lst(char **split, int size)
+{
+	(void)split;
+	(void)size;
+}
+
+t_sck	init_sck(int ac, char **av)
+{
+	t_sck	sck;
+	char	*arg;
+	char	**split;
+	int		i;
+
+	arg = merge_arg(av, ac);
+	split = ft_split(arg, ' ');
+	sck.size_a = arrlen(split);
+	sck.a = split_to_arr(split, sck.size_a);
+	free(arg);
+	i = 0;
+	while (i < stacks.sizemax)
+		free(split[i++]);
+	free(split);
+	stacks.a.size = stacks.sizemax;
+	find_dup(stacks.a.value, stacks.a.size);
+	stacks.b.value = ft_calloc(sizeof(stacks.b), stacks.sizemax);
+	stacks.b.size = 0;
+	return (sck);
 }
 
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
-	// t_stacks	stacks2;
+	t_sck		sck;
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
 	stacks = init_stacks(ac, av);
-	// stacks2 = init_stacks(ac, av);
+	sck = init_sck(ac, av);
 	check_sort(stacks);
 	if (stacks.sizemax <= 5)
 		simple_sort(&stacks);
 	else
 	{
-		// quicksort_ite(&stacks, stacks.a.value, 0, stacks.a.size - 1, stacks.a.size - 1);
 		sort_stack(&stacks);
 	}
-	// printf("quick1\n\n");
-	// print_arr(stacks.a.value, stacks.a.size - 1);
-	// printf("quick2\n\n");
-	// swappp(&stacks2, 0, 5);
-	// print_arr(stacks2.a.value, stacks2.a.size - 1);
-	// swappp(&stacks2, 1, 4);
-	// print_arr(stacks2.a.value, stacks2.a.size - 1);
-	// swappp(&stacks2, 2, 3);
-	// print_arr(stacks2.a.value, stacks2.a.size - 1);
-	// print_arr(stacks2.b.value, stacks.b.size - 1);
-	// opti_rot(&stacks, &stacks.a, 6, 'A');
-	// do_rule_nb(&stacks, "PB", 2);
-	// r_rotate(&stacks.b, "rrb\n");
-	// while (stacks.a.size)
-	// {
-		// rotate(&stacks.b, "rb\n");
-		// push_b(&stacks);
-		// print_stacks(stacks);
-	// }
-	// opti_rot(&stacks, &stacks.b, 6, 'B');
-	// do_rule_nb(&stacks, "PA", stacks.b.size);
 	// print_stacks(stacks);
 	return (EXIT_SUCCESS);
 }
