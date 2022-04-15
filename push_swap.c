@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/14 16:52:29 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:51:14 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,51 +72,69 @@ void	swappp(t_stacks *stacks, int i, int j)
 	(void)b;
 }
 
-void	split_to_lst(char **split, int size)
-{
-	(void)split;
-	(void)size;
-}
+// void	split_to_lst(char **split, int size)
+// {
+// 	(void)split;
+// 	(void)size;
+// }
 
-t_sck	init_sck(int ac, char **av)
-{
-	t_sck	sck;
-	char	*arg;
-	char	**split;
-	int		i;
+// t_sck	init_list(t_stacks	stacks)
+// {
+// 	t_sck	sck;
+// 	char	*arg;
+// 	char	**split;
+	// int		i;
 
-	arg = merge_arg(av, ac);
-	split = ft_split(arg, ' ');
-	sck.size_a = arrlen(split);
-	sck.a = split_to_arr(split, sck.size_a);
-	free(arg);
-	i = 0;
-	while (i < stacks.sizemax)
-		free(split[i++]);
-	free(split);
-	stacks.a.size = stacks.sizemax;
-	find_dup(stacks.a.value, stacks.a.size);
-	stacks.b.value = ft_calloc(sizeof(stacks.b), stacks.sizemax);
-	stacks.b.size = 0;
-	return (sck);
-}
+	// arg = merge_arg(av, ac);
+	// split = ft_split(arg, ' ');
+	// sck.size_a = arrlen(split);
+	// sck.a = split_to_arr(split, sck.size_a);
+	// free(arg);
+	// i = 0;
+	// while (i < stacks.sizemax)
+	// 	free(split[i++]);
+	// free(split);
+	// stacks.a.size = stacks.sizemax;
+	// find_dup(stacks.a.value, stacks.a.size);
+	// stacks.b.value = ft_calloc(sizeof(stacks.b), stacks.sizemax);
+	// stacks.b.size = 0;
+// 	(void)stacks;
+// 	(void)sck;
+// 	return (sck);
+// }
+
+
 
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
-	t_sck		sck;
+	t_node		*head;
+	// t_sck		sck;
+
+	head = NULL;
+	append(&head, 6);
+	push(&head, 7);
+	push(&head, 1);
+	append(&head, 4);
+	insert_after(head->next, 8);
+	print_list(head);
+	printf("\n");
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
 	stacks = init_stacks(ac, av);
-	sck = init_sck(ac, av);
+	// sck = init_sck(ac, av);
 	check_sort(stacks);
 	if (stacks.sizemax <= 5)
 		simple_sort(&stacks);
 	else
 	{
-		sort_stack(&stacks);
+		stacks.op = 0;
+		// quicksort(&stacks, stacks.a.value, 0, stacks.sizemax - 1);
+		// sort_stack(&stacks);
 	}
+	// print_arr(stacks.a.value, stacks.a.size - 1);
+	// printf("op:%d\n", stacks.op);
 	// print_stacks(stacks);
 	return (EXIT_SUCCESS);
 }

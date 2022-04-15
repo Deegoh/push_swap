@@ -11,7 +11,8 @@ SRC = push_swap.c\
 	  rules_utils.c\
 	  quick_sort.c\
 	  sort_stack.c\
-	  print_utils.c
+	  print_utils.c\
+	  nodes_utils.c
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)

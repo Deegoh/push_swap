@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/14 16:44:37 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/15 16:44:11 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define PUSH_SWAP_H
 # include "libft/libft.h"
 
-typedef struct s_lst
+typedef struct s_node
 {
-	int		data;
-	t_lst	*next;
-	t_lst	*prev;
-}			t_lst;
+	int				data;
+	struct s_node	*next;
+	struct s_node	*prev;
+}			t_node;
 
 typedef struct s_sck
 {
@@ -29,8 +29,8 @@ typedef struct s_sck
 	int		end_b;
 	int		size_a;
 	int		size_b;
-	t_lst	a;
-	t_lst	b;
+	t_node	a;
+	t_node	b;
 }			t_sck;
 
 typedef struct s_stack
@@ -42,6 +42,7 @@ typedef struct s_stack
 typedef struct s_stacks
 {
 	int		sizemax;
+	int		op;
 	t_stack	a;
 	t_stack	b;
 }			t_stacks;
@@ -73,8 +74,9 @@ void		sort5(t_stacks *stacks);
 void		simple_sort(t_stacks *stacks);
 
 void		swapp(int *a, int *b);
+void		swapppp(t_stacks *stacks, int *a, int *b);
 int			partition_ite(t_stacks *stacks, int arr[], int l, int h);
-void		quicksort_ite(t_stacks *stacks, int arr[], int l, int h);
+void		quicksort(t_stacks *stacks, int arr[], int l, int h);
 void		swappp(t_stacks *stacks, int i, int j);
 
 void		sort_stack(t_stacks *stacks);
@@ -82,5 +84,11 @@ void		sorted_insert(t_stacks *stacks, int x);
 
 void		print_arr(int arr[], int n);
 void		print_stacks(t_stacks stacks);
+
+
+void		print_list(t_node *node);
+void		append(t_node **head_ref, int new_data);
+void		insert_after(t_node *prev_node, int new_data);
+void		push(t_node **head_ref, int new_data);
 
 #endif

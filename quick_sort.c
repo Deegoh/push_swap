@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:51:40 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/14 16:35:08 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/15 15:04:57 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,42 @@ void	swapp(int *a, int *b)
 	*a = *b;
 	*b = t;
 	printf("swapp(%d, %d)\n", *a, *b);
+}
+
+void	swapppp(t_stacks *stacks, int *a, int *b)
+{
+	int	t;
+
+	t = *a;
+	*a = *b;
+	*b = t;
+	stacks->op = stacks->op + 1;
+
+	// printf("swapp(%d, %d)\n", *a, *b);
+}
+
+int	partition(t_stacks *stacks, int arr[], int l, int h)
+{
+	int	x;
+	int	i;
+	int	j;
+
+	x = arr[h];
+	i = (l - 1);
+	j = l;
+	while (j <= h - 1)
+	{
+		if (arr[j] <= x)
+		{
+			i++;
+			swapppp(stacks, &arr[i], &arr[j]);
+			// swapp(&arr[i], &arr[j]);
+		}
+		j++;
+	}
+	swapppp(stacks, &arr[i + 1], &arr[h]);
+	// swapp(&arr[i + 1], &arr[h]);
+	return (i + 1);
 }
 
 /* This function is same in both iterative and recursive*/
@@ -43,8 +79,8 @@ int	partition_ite(t_stacks *stacks, int arr[], int l, int h)
 				// printf("i[%d] j[%d]\n", i, j);
 				// printf("avant:");
 				// print_arr(arr, maxarr);
-				swappp(stacks, i, j);
-				// swapp(&arr[i], &arr[j]);
+				// swappp(stacks, i, j);
+				swapppp(stacks, &arr[i], &arr[j]);
 				check_sort(*stacks);
 				// printf("apres:");
 				// print_arr(arr, maxarr);
@@ -58,8 +94,8 @@ int	partition_ite(t_stacks *stacks, int arr[], int l, int h)
 		// printf("i + 1[%d] h[%d]\n", i + 1, h);
 		// printf("avant:");
 		// print_arr(arr, maxarr);
-		// swapp(&arr[i + 1], &arr[h]);
-		swappp(stacks, i + 1, h);
+		// swappp(stacks, i + 1, h);
+		swapppp(stacks, &arr[i + 1], &arr[h]);
 		check_sort(*stacks);
 		// printf("apres:");
 		// print_arr(arr, maxarr);
@@ -72,45 +108,14 @@ int	partition_ite(t_stacks *stacks, int arr[], int l, int h)
 /* A[] --> Array to be sorted,
    l  --> Starting index,
    h  --> Ending index */
-void	quicksort_ite(t_stacks *stacks, int arr[], int l, int h)
+void	quicksort(t_stacks *stacks, int arr[], int l, int h)
 {
-	// printf("quick: l[%d] h[%d]\n      ", l, h);
-	// print_arr(arr, h);
-	// Create an auxiliary stack
-	int stack[h - l + 1];
+	int	p;
 
-	// initialize top of stack
-	int top = -1;
-
-	// push initial values of l and h to stack
-	stack[++top] = l;
-	stack[++top] = h;
-
-	// Keep popping from stack while is not empty
-	while (top >= 0)
+	if (l < h)
 	{
-		// Pop h and l
-		h = stack[top--];
-		l = stack[top--];
-
-		// Set pivot element at its correct position
-		// in sorted array
-		int p = partition_ite(stacks, arr, l, h);
-		// printf("quick: p[%d]\n", p);
-		// If there are elements on left side of pivot,
-		// then push left side to stack
-		if (p - 1 > l)
-		{
-			stack[++top] = l;
-			stack[++top] = p - 1;
-		}
-		
-		// If there are elements on right side of pivot,
-		// then push right side to stack
-		if (p + 1 < h)
-		{
-			stack[++top] = p + 1;
-			stack[++top] = h;
-		}
+		p = partition_ite(stacks, arr, l, h);
+		quicksort(stacks, arr, l, p - 1);
+		quicksort(stacks, arr, p + 1, h);
 	}
 }
