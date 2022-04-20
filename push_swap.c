@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/20 20:45:51 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:54:30 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,10 @@ void	swappp(t_stacks *stacks, int i, int j)
 void	custumsort(t_stacks *stacks)
 {
 	int	i;
-	int	boo;
-	int	j = 3;
 
-	boo = 1;
-	while (--j)
+	while (stacks->a.size)
 	{
-		if (boo)
-		{
-			stacks->pivot = stacks->a.value[stacks->a.size - 1];
-			boo = 0;
-		}
-		else
-			stacks->pivot = stacks->a.value[0];
+		stacks->pivot = stacks->a.value[stacks->a.size - 1];
 		i = -1;
 		while (++i < stacks->a.size - 1)
 		{
