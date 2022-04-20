@@ -1,6 +1,6 @@
 NAME = push_swap
 CHECKER = checker_Mac
-CHECKER = checker_linux
+# CHECKER = checkermake_linux
 CC = cc
 CFLAGS = -Werror -Wall -Wextra #-g -fsanitize=address
 SRC = push_swap.c\
@@ -17,7 +17,7 @@ RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
-ARG=`ruby -e "puts (-100..100).to_a.shuffle.join(' ')"`
+ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 OBJ = $(SRC:.c=.o)
 ARG1= 90 68 14 34 99
 

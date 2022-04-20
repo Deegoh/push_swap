@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/15 16:51:14 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:45:51 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,58 @@ void	swappp(t_stacks *stacks, int i, int j)
 // 	return (sck);
 // }
 
+void	custumsort(t_stacks *stacks)
+{
+	int	i;
+	int	boo;
+	int	j = 3;
 
+	boo = 1;
+	while (--j)
+	{
+		if (boo)
+		{
+			stacks->pivot = stacks->a.value[stacks->a.size - 1];
+			boo = 0;
+		}
+		else
+			stacks->pivot = stacks->a.value[0];
+		i = -1;
+		while (++i < stacks->a.size - 1)
+		{
+			if (stacks->a.value[i] < stacks->pivot)
+			{
+				opti_rot(stacks, &stacks->a, stacks->a.value[i], 'A');
+				push_b(stacks);
+			}
+		}
+		opti_rot(stacks, &stacks->a, stacks->pivot, 'A');
+		push_b(stacks);
+		print_stacks(*stacks);
+	}
+	
+	// stacks->pivot = stacks->a.value[stacks->a.size - 1];
+	// i = -1;
+	// while (++i < stacks->a.size - 1)
+	// {
+	// 	if (stacks->a.value[i] < stacks->pivot)
+	// 		push_b(stacks);
+	// }
+	// opti_rot(stacks, &stacks->a, stacks->pivot, 'A');
+	// push_b(stacks);
+	// print_stacks(*stacks);
+	// stacks->pivot = stacks->a.value[0];
+	// rotate(&stacks->a, "ra\n");
+	// i = -1;
+	// while (++i < stacks->a.size - 1)
+	// {
+	// 	if (stacks->a.value[i] < stacks->pivot)
+	// 		push_b(stacks);
+	// }
+	// opti_rot(stacks, &stacks->a, stacks->pivot, 'A');
+	// push_b(stacks);
+	// print_stacks(*stacks);
+}
 
 int	main(int ac, char *av[])
 {
@@ -117,8 +168,8 @@ int	main(int ac, char *av[])
 	push(&head, 1);
 	append(&head, 4);
 	insert_after(head->next, 8);
-	print_list(head);
-	printf("\n");
+	// print_list(head);
+	// printf("\n");
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
@@ -129,7 +180,8 @@ int	main(int ac, char *av[])
 		simple_sort(&stacks);
 	else
 	{
-		stacks.op = 0;
+		custumsort(&stacks);
+		// stacks.op = 0;
 		// quicksort(&stacks, stacks.a.value, 0, stacks.sizemax - 1);
 		// sort_stack(&stacks);
 	}

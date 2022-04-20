@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/15 16:44:11 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:12:07 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_stacks
 {
 	int		sizemax;
 	int		op;
+	int		pivot;
 	t_stack	a;
 	t_stack	b;
 }			t_stacks;
@@ -84,7 +85,6 @@ void		sorted_insert(t_stacks *stacks, int x);
 
 void		print_arr(int arr[], int n);
 void		print_stacks(t_stacks stacks);
-
 
 void		print_list(t_node *node);
 void		append(t_node **head_ref, int new_data);

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:47:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/13 14:04:01 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:17:35 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,14 @@ void	opti_rot(t_stacks *stacks, t_stack *stack, int value, char c)
 		j--;
 	if (i == 0 && j == 0)
 		return ;
-	if (c == 'A')
-	{
-		if (i < stack->size - j)
-			do_rule_nb(stacks, "RA", i);
-		else
-			do_rule_nb(stacks, "RRA", stack->size - j);
-	}
-	if (c == 'B')
-	{
-		if (i < stack->size - j)
-			do_rule_nb(stacks, "RB", i);
-		else
-			do_rule_nb(stacks, "RRB", stack->size - j);
-	}
+	if (c == 'A' && i < stack->size - j)
+		do_rule_nb(stacks, "RA", i);
+	else
+		do_rule_nb(stacks, "RRA", stack->size - j);
+	if (c == 'B' && i < stack->size - j)
+		do_rule_nb(stacks, "RB", i);
+	else
+		do_rule_nb(stacks, "RRB", stack->size - j);
 }
 
 long	ft_atol(const char *str)

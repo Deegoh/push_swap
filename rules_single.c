@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:41:59 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/03/29 23:51:37 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:48:14 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	push_a(t_stacks *stacks)
 			stacks->b.value[i] = stacks->b.value[i + 1];
 		stacks->b.value[i] = 0;
 		stacks->b.size--;
-		ft_putstr_fd("pa\n", 1);
+		// ft_putstr_fd("pa\n", 1);
 	}
 }
 /*
@@ -75,7 +75,7 @@ void	push_b(t_stacks *stacks)
 			stacks->a.value[i] = stacks->a.value[i + 1];
 		stacks->a.value[i] = 0;
 		stacks->a.size--;
-		ft_putstr_fd("pb\n", 1);
+		// ft_putstr_fd("pb\n", 1);
 	}
 }
 
@@ -96,8 +96,8 @@ void	rotate(t_stack *stack, char *print)
 		while (++i < stack->size)
 			stack->value[i - 1] = stack->value[i];
 		stack->value[i - 1] = tmp;
-		if (print)
-			ft_putstr_fd(print, 1);
+		// ft_putstr_fd(print, 1);
+		(void)print;
 	}
 }
 
@@ -118,7 +118,7 @@ void	r_rotate(t_stack *stack, char *print)
 		while (--i)
 			stack->value[i] = stack->value[i - 1];
 		stack->value[0] = tmp;
-		if (print)
-			ft_putstr_fd(print, 1);
+		// ft_putstr_fd(print, 1);
+		(void)print;
 	}
 }

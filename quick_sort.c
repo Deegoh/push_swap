@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:51:40 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/15 15:04:57 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:29:01 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	swapppp(t_stacks *stacks, int *a, int *b)
 	*a = *b;
 	*b = t;
 	stacks->op = stacks->op + 1;
-
 	// printf("swapp(%d, %d)\n", *a, *b);
 }
 
