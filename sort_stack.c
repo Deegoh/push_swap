@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:47:41 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/12 16:18:34 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:11:00 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	sorted_insert(t_stacks *stacks, int x)
 		return ;
 	}
 	push_b(stacks);
-	rotate(&stacks->b, "rb\n");
+	rotate(stacks, &stacks->b, "rb\n");
 	sorted_insert(stacks, x);
-	r_rotate(&stacks->b, "rrb\n");
+	r_rotate(stacks, &stacks->b, "rrb\n");
 	push_a(stacks);
 }
 

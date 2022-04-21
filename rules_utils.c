@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:47:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/20 20:17:35 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 21:35:12 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	check_rule(t_stacks *stacks, char *str)
 	else if (!ft_strncmp(str, "PB", ft_strlen(str)))
 		push_b(stacks);
 	else if (!ft_strncmp(str, "SA", ft_strlen(str)))
-		swap(&stacks->a, "sa\n");
+		swap(stacks, &stacks->a, "sa\n");
 	else if (!ft_strncmp(str, "SB", ft_strlen(str)))
-		swap(&stacks->b, "sb\n");
+		swap(stacks, &stacks->b, "sb\n");
 	else if (!ft_strncmp(str, "RA", ft_strlen(str)))
-		rotate(&stacks->a, "ra\n");
+		rotate(stacks, &stacks->a, "ra\n");
 	else if (!ft_strncmp(str, "RB", ft_strlen(str)))
-		rotate(&stacks->b, "rb\n");
+		rotate(stacks, &stacks->b, "rb\n");
 	else if (!ft_strncmp(str, "RRA", ft_strlen(str)))
-		r_rotate(&stacks->a, "rra\n");
+		r_rotate(stacks, &stacks->a, "rra\n");
 	else if (!ft_strncmp(str, "RRB", ft_strlen(str)))
-		r_rotate(&stacks->b, "rrb\n");
+		r_rotate(stacks, &stacks->b, "rrb\n");
 	else if (!ft_strncmp(str, "SS", ft_strlen(str)))
 		d_swap(stacks);
 	else if (!ft_strncmp(str, "RR", ft_strlen(str)))
@@ -61,11 +61,11 @@ void	opti_rot(t_stacks *stacks, t_stack *stack, int value, char c)
 		return ;
 	if (c == 'A' && i < stack->size - j)
 		do_rule_nb(stacks, "RA", i);
-	else
+	else if (c == 'A' && i > stack->size - j)
 		do_rule_nb(stacks, "RRA", stack->size - j);
-	if (c == 'B' && i < stack->size - j)
+	else if (c == 'B' && i < stack->size - j)
 		do_rule_nb(stacks, "RB", i);
-	else
+	else if (c == 'B' && i > stack->size - j)
 		do_rule_nb(stacks, "RRB", stack->size - j);
 }
 

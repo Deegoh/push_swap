@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/21 15:54:44 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 21:36:25 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	swappp(t_stacks *stacks, int i, int j)
 	if (i == 0 && j == max)
 	{
 		opti_rot(stacks, &stacks->a, stacks->a.value[j], 'A');
-		swap(&stacks->a,"sa\n");
+		swap(stacks, &stacks->a,"sa\n");
 		opti_rot(stacks, &stacks->a, init, 'A');
 		return ;	
 	}
 	opti_rot(stacks, &stacks->a, stacks->a.value[i], 'A');
 	if (i + 1 == j)
 	{
-		swap(&stacks->a,"sa\n");
+		swap(stacks, &stacks->a,"sa\n");
 		opti_rot(stacks, &stacks->a, init, 'A');
 		return ;	
 	}
@@ -53,7 +53,7 @@ void	swappp(t_stacks *stacks, int i, int j)
 	opti_rot(stacks, &stacks->a, stacks->a.value[j], 'A');
 	push_b(stacks);
 	// if (stacks->b.value[0] > stacks->b.value[1])
-	rotate(&stacks->b, "rb\n");
+	rotate(stacks, &stacks->b, "rb\n");
 	// print_stacks(*stacks);
 	push_a(stacks);
 	// // print_stacks(*stacks);
@@ -106,28 +106,44 @@ void	swappp(t_stacks *stacks, int i, int j)
 void	custumsort(t_stacks *stacks)
 {
 	int	i;
+	int	nbr;
+	int	pivot;
+	
 
-	while (stacks->a.size)
+	while (stacks->a.size > 1)
 	{
-		stacks->pivot = stacks->a.value[stacks->a.size - 1];
-		if (stacks->pivot == stacks->max && stacks->a.size > 2)
-		{
-			rotate(&stacks->a, "ra\n");
-			stacks->pivot = stacks->a.value[stacks->a.size - 1];
-		}
+		push(&stacks->pivot, stacks->a.value[stacks->a.size - 1]);
+		pivot = stacks->a.value[stacks->a.size - 1];
+		// if (stacks->pivot == stacks->max && stacks->a.size > 1)
+		// {
+		// 	r_rotate(stacks, &stacks->a, "rra\n");
+		// 	stacks->pivot = stacks->a.value[stacks->a.size - 1];
+		// }
 		i = -1;
+		nbr = 0;
 		while (++i < stacks->a.size - 1)
+			if (stacks->a.value[i] < pivot)
+				nbr++;
+		while (nbr--)
 		{
-			if (stacks->a.value[i] < stacks->pivot)
+			if (stacks->a.value[0] < pivot)
 			{
-				opti_rot(stacks, &stacks->a, stacks->a.value[i], 'A');
+				// opti_rot(stacks, &stacks->a, stacks->a.value[i], 'A');
 				push_b(stacks);
 			}
-			rotate(&stacks->a, "ra\n");
+			else
+			{
+				rotate(stacks, &stacks->a, "ra\n");
+				nbr++;
+			}
+			print_stacks(*stacks);
+			// sleep(3);
 		}
-		opti_rot(stacks, &stacks->a, stacks->pivot, 'A');
+		opti_rot(stacks, &stacks->a, pivot, 'A');
 		push_b(stacks);
 		print_stacks(*stacks);
+		print_list(stacks->pivot);
+		//TODO check rrb
 	}
 	// opti_rot(stacks, &stacks->b, stacks->max, 'B');
 	// print_stacks(*stacks);
@@ -173,35 +189,42 @@ void	set_min_max(t_stacks *stacks)
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
-	t_node		*head;
+	// t_node		*head;
 	// t_sck		sck;
 
-	head = NULL;
-	append(&head, 6);
-	push(&head, 7);
-	push(&head, 1);
-	append(&head, 4);
-	insert_after(head->next, 8);
+	// head = NULL;
+	// append(&head, "hello");
+	// append(&head, 2);
+	// append(&head, 3);
+	// push(&head, 7);
+	// push(&head, 1);
+	// append(&head, 4);
+	// insert_after(head->next, 8);
 	// print_list(head);
 	// printf("\n");
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
 	stacks = init_stacks(ac, av);
+	stacks.op = ft_strdup("");
+	stacks.pivot = NULL;
 	// sck = init_sck(ac, av);
-	check_sort(stacks);
-	set_min_max(&stacks);
-	if (stacks.sizemax <= 5)
-		simple_sort(&stacks);
-	else
+	if (check_sort(stacks))
 	{
-		custumsort(&stacks);
-		// stacks.op = 0;
-		// quicksort(&stacks, stacks.a.value, 0, stacks.sizemax - 1);
-		// sort_stack(&stacks);
+		set_min_max(&stacks);
+		print_stacks(stacks);
+		if (stacks.sizemax <= 5)
+			simple_sort(&stacks);
+		else
+		{
+			custumsort(&stacks);
+			// stacks.op = 0;
+			// quicksort(&stacks, stacks.a.value, 0, stacks.sizemax - 1);
+			// sort_stack(&stacks);
+		}
 	}
+	ft_printf("\n%s", stacks.op);
 	// print_arr(stacks.a.value, stacks.a.size - 1);
-	// printf("op:%d\n", stacks.op);
 	// print_stacks(stacks);
 	return (EXIT_SUCCESS);
 }

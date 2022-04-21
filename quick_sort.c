@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:51:40 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/20 17:29:01 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:18:45 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	partition_ite(t_stacks *stacks, int arr[], int l, int h)
 				// print_arr(arr, maxarr);
 				// swappp(stacks, i, j);
 				swapppp(stacks, &arr[i], &arr[j]);
-				check_sort(*stacks);
+				// check_sort(*stacks);
 				// printf("apres:");
 				// print_arr(arr, maxarr);
 				// printf("%d[%d] = partition(l[%d], h[%d])\n", i + 1, arr[i + 1], l, h);
@@ -95,7 +95,7 @@ int	partition_ite(t_stacks *stacks, int arr[], int l, int h)
 		// print_arr(arr, maxarr);
 		// swappp(stacks, i + 1, h);
 		swapppp(stacks, &arr[i + 1], &arr[h]);
-		check_sort(*stacks);
+		// check_sort(*stacks);
 		// printf("apres:");
 		// print_arr(arr, maxarr);
 		// printf("%d[%d] = partition(l[%d], h[%d])\n", i + 1, arr[i + 1], l, h);

@@ -21,7 +21,7 @@ LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-ARG1= 90 68 14 34 99
+ARG1= 6 7 1 4 10 2 8 3 9 5
 OBJ = $(SRC:.c=.o)
 .PHONY: all clean fclean re libft
 

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:18:37 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/15 17:45:40 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:33:12 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,19 +94,21 @@ void	print_list(t_node *node)
 {
 	t_node	*last;
 
-	printf("\nTraversal in forward direction \n");
+	// printf("\nTraversal in forward direction \n");
 	while (node != NULL)
 	{
-		printf(" %d ", node->data);
+		ft_printf("%d ", node->data);
 		last = node;
 		node = node->next;
 	}
-	printf("\nTraversal in reverse direction \n");
-	while (last != NULL)
-	{
-		printf(" %d ", last->data);
-		last = last->prev;
-	}
+	ft_printf("\n");
+	(void)last;
+	// printf("\nTraversal in reverse direction \n");
+	// while (last != NULL)
+	// {
+	// 	printf(" %d ", last->data);
+	// 	last = last->prev;
+	// }
 }
 
 void	delete_node(t_node **head_ref, t_node *del)

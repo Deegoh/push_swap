@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:41:59 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/20 20:48:14 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:02:43 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ sa/sb : swap the first 2 elements at the top of stack.
 Do nothing if there is only one or no elements).
 @print sa or sb
 */
-void	swap(t_stack *stack, char *print)
+void	swap(t_stacks *stacks, t_stack *stack, char *print)
 {
 	int	tmp;
 
@@ -27,7 +27,7 @@ void	swap(t_stack *stack, char *print)
 		stack->value[0] = stack->value[1];
 		stack->value[1] = tmp;
 		if (print)
-			ft_putstr_fd(print, 1);
+			stacks->op = ft_strjoin(stacks->op, print);
 	}
 }
 
@@ -51,6 +51,7 @@ void	push_a(t_stacks *stacks)
 			stacks->b.value[i] = stacks->b.value[i + 1];
 		stacks->b.value[i] = 0;
 		stacks->b.size--;
+		stacks->op = ft_strjoin(stacks->op, "pa\n");
 		// ft_putstr_fd("pa\n", 1);
 	}
 }
@@ -75,6 +76,7 @@ void	push_b(t_stacks *stacks)
 			stacks->a.value[i] = stacks->a.value[i + 1];
 		stacks->a.value[i] = 0;
 		stacks->a.size--;
+		stacks->op = ft_strjoin(stacks->op, "pb\n");
 		// ft_putstr_fd("pb\n", 1);
 	}
 }
@@ -84,7 +86,7 @@ rotate a/b - shift up all elements of stack by 1.
 The first element becomes the last one.
 @print ra or rb
  */
-void	rotate(t_stack *stack, char *print)
+void	rotate(t_stacks *stacks, t_stack *stack, char *print)
 {
 	int	tmp;
 	int	i;
@@ -96,8 +98,9 @@ void	rotate(t_stack *stack, char *print)
 		while (++i < stack->size)
 			stack->value[i - 1] = stack->value[i];
 		stack->value[i - 1] = tmp;
-		// ft_putstr_fd(print, 1);
-		(void)print;
+		if (print)
+			stacks->op = ft_strjoin(stacks->op, print);
+			// ft_putstr_fd(print, 1);
 	}
 }
 
@@ -106,7 +109,7 @@ reverse rotate a/b - shift down all elements of stack by 1.
 The last element becomes the first one.
 @print rra or rrb
  */
-void	r_rotate(t_stack *stack, char *print)
+void	r_rotate(t_stacks *stacks, t_stack *stack, char *print)
 {
 	int	tmp;
 	int	i;
@@ -118,7 +121,8 @@ void	r_rotate(t_stack *stack, char *print)
 		while (--i)
 			stack->value[i] = stack->value[i - 1];
 		stack->value[0] = tmp;
-		// ft_putstr_fd(print, 1);
-		(void)print;
+		if (print)
+			stacks->op = ft_strjoin(stacks->op, print);
+			// ft_putstr_fd(print, 1);
 	}
 }
