@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/20 20:54:30 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:54:44 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ void	custumsort(t_stacks *stacks)
 	while (stacks->a.size)
 	{
 		stacks->pivot = stacks->a.value[stacks->a.size - 1];
+		if (stacks->pivot == stacks->max && stacks->a.size > 2)
+		{
+			rotate(&stacks->a, "ra\n");
+			stacks->pivot = stacks->a.value[stacks->a.size - 1];
+		}
 		i = -1;
 		while (++i < stacks->a.size - 1)
 		{
@@ -118,12 +123,14 @@ void	custumsort(t_stacks *stacks)
 				opti_rot(stacks, &stacks->a, stacks->a.value[i], 'A');
 				push_b(stacks);
 			}
+			rotate(&stacks->a, "ra\n");
 		}
 		opti_rot(stacks, &stacks->a, stacks->pivot, 'A');
 		push_b(stacks);
 		print_stacks(*stacks);
 	}
-	
+	// opti_rot(stacks, &stacks->b, stacks->max, 'B');
+	// print_stacks(*stacks);
 	// stacks->pivot = stacks->a.value[stacks->a.size - 1];
 	// i = -1;
 	// while (++i < stacks->a.size - 1)
@@ -147,6 +154,22 @@ void	custumsort(t_stacks *stacks)
 	// print_stacks(*stacks);
 }
 
+void	set_min_max(t_stacks *stacks)
+{
+	int	i;
+
+	i = -1;
+	stacks->max = stacks->a.value[0];
+	stacks->min = stacks->a.value[0];
+	while (++i < stacks->a.size - 1)
+	{
+		if (stacks->max < stacks->a.value[i])
+			stacks->max = stacks->a.value[i];
+		if (stacks->min > stacks->a.value[i])
+			stacks->min = stacks->a.value[i];
+	}
+}
+
 int	main(int ac, char *av[])
 {
 	t_stacks	stacks;
@@ -167,6 +190,7 @@ int	main(int ac, char *av[])
 	stacks = init_stacks(ac, av);
 	// sck = init_sck(ac, av);
 	check_sort(stacks);
+	set_min_max(&stacks);
 	if (stacks.sizemax <= 5)
 		simple_sort(&stacks);
 	else

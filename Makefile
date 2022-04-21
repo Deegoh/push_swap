@@ -1,6 +1,9 @@
 NAME = push_swap
-CHECKER = checker_Mac
-# CHECKER = checkermake_linux
+ifeq (uname,Linux)
+	CHECKER = checkermake_linux
+else
+	CHECKER = checker_Mac
+endif
 CC = cc
 CFLAGS = -Werror -Wall -Wextra #-g -fsanitize=address
 SRC = push_swap.c\
@@ -18,9 +21,8 @@ LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-OBJ = $(SRC:.c=.o)
 ARG1= 90 68 14 34 99
-
+OBJ = $(SRC:.c=.o)
 .PHONY: all clean fclean re libft
 
 all: $(NAME)
@@ -43,6 +45,5 @@ v2: all
 test: all
 	cp $(NAME) ../push_swap_tester/.
 	bash ../push_swap_tester/tester.sh
-checker: all
+run: all
 	./$(NAME) $(ARG)
-	./$(NAME) $(ARG) | ./$(CHECKER) $(ARG)

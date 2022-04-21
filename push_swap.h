@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/20 19:12:07 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:47:02 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_stacks
 	int		sizemax;
 	int		op;
 	int		pivot;
+	int		max;
+	int		min;
 	t_stack	a;
 	t_stack	b;
 }			t_stacks;
@@ -90,5 +92,7 @@ void		print_list(t_node *node);
 void		append(t_node **head_ref, int new_data);
 void		insert_after(t_node *prev_node, int new_data);
 void		push(t_node **head_ref, int new_data);
+
+void		set_min_max(t_stacks *stacks);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/20 20:24:33 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:48:14 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	print_stacks(t_stacks stacks)
 
 	i = 0;
 	printf("\nstacks sizemax:%d\n", stacks.sizemax);
-	printf("pivot:%d\n", stacks.pivot);
-	printf("s_a:%d s_b:%d\n", stacks.a.size, stacks.b.size);
+	printf("min[%d] max[%d] ", stacks.min, stacks.max);
+	printf("pivot[%d]\n", stacks.pivot);
 	while (i < stacks.a.size || i < stacks.b.size)
 	{
 		if (i < stacks.a.size)
