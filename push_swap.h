@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/21 19:28:08 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:46:57 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void		print_list(t_node *node);
 void		append(t_node **head_ref, int new_data);
 void		insert_after(t_node *prev_node, int new_data);
 void		push(t_node **head_ref, int new_data);
+void		delete_node(t_node **head_ref, t_node *del);
 
 void		set_min_max(t_stacks *stacks);
 

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:18:37 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/21 19:33:12 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:59:50 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,28 +88,7 @@ void	append(t_node **head_ref, int new_data)
 	return ;
 }
 
-// This function prints contents of linked list starting
-// from the given node
-void	print_list(t_node *node)
-{
-	t_node	*last;
 
-	// printf("\nTraversal in forward direction \n");
-	while (node != NULL)
-	{
-		ft_printf("%d ", node->data);
-		last = node;
-		node = node->next;
-	}
-	ft_printf("\n");
-	(void)last;
-	// printf("\nTraversal in reverse direction \n");
-	// while (last != NULL)
-	// {
-	// 	printf(" %d ", last->data);
-	// 	last = last->prev;
-	// }
-}
 
 void	delete_node(t_node **head_ref, t_node *del)
 {
@@ -130,9 +109,9 @@ void	delete_node(t_node **head_ref, t_node *del)
 	return ;
 }
 
-t_node *last_node(t_node *root)
+t_node	*last_node(t_node *root)
 {
 	while (root && root->next)
 		root = root->next;
-	return root;
+	return (root);
 }

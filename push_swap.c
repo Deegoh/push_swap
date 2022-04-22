@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/21 21:36:25 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:53:08 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,11 @@ void	custumsort(t_stacks *stacks)
 	int	i;
 	int	nbr;
 	int	pivot;
-	
 
 	while (stacks->a.size > 1)
 	{
-		push(&stacks->pivot, stacks->a.value[stacks->a.size - 1]);
 		pivot = stacks->a.value[stacks->a.size - 1];
+		push(&stacks->pivot, pivot);
 		// if (stacks->pivot == stacks->max && stacks->a.size > 1)
 		// {
 		// 	r_rotate(stacks, &stacks->a, "rra\n");
@@ -127,24 +126,29 @@ void	custumsort(t_stacks *stacks)
 		while (nbr--)
 		{
 			if (stacks->a.value[0] < pivot)
-			{
-				// opti_rot(stacks, &stacks->a, stacks->a.value[i], 'A');
 				push_b(stacks);
-			}
 			else
 			{
 				rotate(stacks, &stacks->a, "ra\n");
 				nbr++;
 			}
 			print_stacks(*stacks);
-			// sleep(3);
+			// sleep(1);
 		}
 		opti_rot(stacks, &stacks->a, pivot, 'A');
-		push_b(stacks);
+		if (pivot != stacks->max)
+			push_b(stacks);
 		print_stacks(*stacks);
-		print_list(stacks->pivot);
 		//TODO check rrb
 	}
+	print_list(stacks->pivot);
+	if (stacks->pivot->data != stacks->max)
+		push(&stacks->pivot, stacks->max);
+	ft_printf("piv %d\n", stacks->pivot->data);
+	print_list(stacks->pivot);
+	// delete_node(&stacks->pivot, stacks->pivot);
+	// print_list(stacks->pivot);
+	
 	// opti_rot(stacks, &stacks->b, stacks->max, 'B');
 	// print_stacks(*stacks);
 	// stacks->pivot = stacks->a.value[stacks->a.size - 1];
@@ -223,7 +227,7 @@ int	main(int ac, char *av[])
 			// sort_stack(&stacks);
 		}
 	}
-	ft_printf("\n%s", stacks.op);
+	// ft_printf("\n%s", stacks.op);
 	// print_arr(stacks.a.value, stacks.a.size - 1);
 	// print_stacks(stacks);
 	return (EXIT_SUCCESS);
