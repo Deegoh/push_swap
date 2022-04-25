@@ -5,23 +5,24 @@ else
 	CHECKER = checker_Mac
 endif
 CC = cc
-CFLAGS = -Werror -Wall -Wextra #-g -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra -g -fsanitize=address
 SRC = push_swap.c\
-	  rules_single.c\
-	  rules_double.c\
 	  parse_arg.c\
 	  simple_sort.c\
 	  rules_utils.c\
-	  quick_sort.c\
-	  sort_stack.c\
 	  print_utils.c\
-	  nodes_utils.c
+	  nodes_utils.c\
+	  nodes_utils2.c\
+	  rules_node.c\
+	  # \
+	  rules_single.c\
+	  rules_double.c
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-ARG1= 6 7 1 4 10 2 8 3 9 5
+ARG1= 3 2 1 4
 OBJ = $(SRC:.c=.o)
 .PHONY: all clean fclean re libft
 
@@ -46,4 +47,6 @@ test: all
 	cp $(NAME) ../push_swap_tester/.
 	bash ../push_swap_tester/tester.sh
 run: all
-	./$(NAME) $(ARG)
+	./$(NAME) $(ARG1)
+lldb: all
+	lldb $(NAME) $(ARG)

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 11:41:59 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/21 18:02:43 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:59:40 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 sa/sb : swap the first 2 elements at the top of stack.
 Do nothing if there is only one or no elements).
-@print sa or sb
+print sa or sb
 */
 void	swap(t_stacks *stacks, t_stack *stack, char *print)
 {
@@ -52,7 +52,6 @@ void	push_a(t_stacks *stacks)
 		stacks->b.value[i] = 0;
 		stacks->b.size--;
 		stacks->op = ft_strjoin(stacks->op, "pa\n");
-		// ft_putstr_fd("pa\n", 1);
 	}
 }
 /*
@@ -81,11 +80,11 @@ void	push_b(t_stacks *stacks)
 	}
 }
 
-/**
+/*
 rotate a/b - shift up all elements of stack by 1.
 The first element becomes the last one.
-@print ra or rb
- */
+print ra or rb
+*/
 void	rotate(t_stacks *stacks, t_stack *stack, char *print)
 {
 	int	tmp;
@@ -107,7 +106,7 @@ void	rotate(t_stacks *stacks, t_stack *stack, char *print)
 /*
 reverse rotate a/b - shift down all elements of stack by 1.
 The last element becomes the first one.
-@print rra or rrb
+print rra or rrb
  */
 void	r_rotate(t_stacks *stacks, t_stack *stack, char *print)
 {

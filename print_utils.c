@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/22 17:00:31 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/25 18:19:27 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,39 @@ void	error_exit(void)
 	exit (EXIT_FAILURE);
 }
 
-void	print_stacks(t_stacks stacks)
+void	print_stacks(t_sck stacks)
 {
-	int	i;
-	int	j;
+	t_sck	tmp;
+	int		j;
 
-	i = -1;
-	ft_printf("\nstacks sizemax:%d\n", stacks.sizemax);
+	tmp = stacks;
+	// ft_printf("\nstacks sizemax:%d\n", stacks.sizemax);
 	ft_printf("min[%d] max[%d]\n", stacks.min, stacks.max);
-	if (stacks.pivot)
-		ft_printf("pivot[%d]\n", stacks.pivot->data);
-	ft_printf("A size[%d] B size[%d]\n", stacks.a.size, stacks.b.size);
-	while (++i < stacks.a.size || i < stacks.b.size)
+	// if (stacks.pivot)
+	// 	ft_printf("pivot[%d]\n", stacks.pivot->data);
+	ft_printf("A size[%d] B size[%d]\n", stacks.size_a, stacks.size_b);
+	// ft_printf("%p\n", tmp.a);
+	while (tmp.a || tmp.b)
 	{
-		if (i < stacks.a.size)
+		if (tmp.a)
 		{
-			j = ft_nbrlen(stacks.a.value[i]);
+			j = ft_nbrlen(tmp.a->data);
 			ft_printf("a:");
 			while (j++ < 4)
 				ft_printf(" ");
-			ft_printf("%d ", stacks.a.value[i]);
+			ft_printf("%d ", tmp.a->data);
+			tmp.a = tmp.a->next;
 		}
 		else
 			ft_printf("a:     ");
-		if (i < stacks.b.size)
+		if (tmp.b)
 		{
-			j = ft_nbrlen(stacks.b.value[i]);
+			j = ft_nbrlen(tmp.b->data);
 			ft_printf("b:");
 			while (j++ < 4)
 				ft_printf(" ");
-			ft_printf("%d\n", stacks.b.value[i]);
+			ft_printf("%d\n", tmp.b->data);
+			tmp.b = tmp.b->next;
 		}
 		else
 			ft_printf("b:\n");
@@ -67,15 +70,16 @@ void	print_arr(int arr[], int n)
 	printf("\n");
 }
 
-int	check_sort(t_stacks	stacks)
+int	check_sort(t_sck stacks)
 {
-	int	i;
-
-	i = 0;
-	while (++i < stacks.sizemax)
+	stacks.a = stacks.a->next;
+	while (stacks.a && stacks.a->prev)
 	{
-		if (stacks.a.value[i - 1] < stacks.a.value[i])
+		if (stacks.a->prev->data < stacks.a->data)
+		{
+			stacks.a = stacks.a->next;
 			continue ;
+		}
 		return (1);
 	}
 	return (0);
@@ -87,19 +91,11 @@ void	print_list(t_node *node)
 {
 	t_node	*last;
 
-	// printf("\nTraversal in forward direction \n");
 	while (node != NULL)
 	{
-		ft_printf("%d ", node->data);
+		ft_printf("%d\n", node->data);
 		last = node;
 		node = node->next;
 	}
 	ft_printf("\n");
-	(void)last;
-	// printf("\nTraversal in reverse direction \n");
-	// while (last != NULL)
-	// {
-	// 	printf(" %d ", last->data);
-	// 	last = last->prev;
-	// }
 }

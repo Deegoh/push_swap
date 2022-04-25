@@ -6,94 +6,87 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/21 18:10:17 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:56:03 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort2(t_stacks *stacks)
+void	sort2(t_sck *stacks)
 {
-	if (stacks->a.value[0] > stacks->a.value[1])
-		swap(stacks, &stacks->a, "sa\n");
+	if (stacks->a->data > stacks->a->next->data)
+		swap(stacks, 'A');
 }
 
-void	sort3(t_stacks *stacks)
+void	sort3(t_sck *stacks)
 {
 	int	v1;
 	int	v2;
 	int	v3;
 
-	v1 = stacks->a.value[0];
-	v2 = stacks->a.value[1];
-	v3 = stacks->a.value[2];
+	v1 = stacks->a->data;
+	v2 = stacks->a->next->data;
+	v3 = stacks->a->next->next->data;
 	if (v1 > v2 && v1 < v3 && v2 < v3)
-		swap(stacks, &stacks->a, "sa\n");
+		swap(stacks, 'A');
 	else if (v1 > v2 && v1 > v3 && v2 > v3)
 	{
-		swap(stacks, &stacks->a, "sa\n");
-		r_rotate(stacks, &stacks->a, "rra\n");
+		swap(stacks, 'A');
+		rotate(stacks, "RRA");
 	}
 	else if (v1 > v2 && v1 > v3 && v2 < v3)
-		rotate(stacks, &stacks->a, "ra\n");
+		rotate(stacks, "RA");
 	else if (v1 < v2 && v1 < v3 && v2 > v3)
 	{
-		swap(stacks, &stacks->a, "sa\n");
-		rotate(stacks, &stacks->a,  "ra\n");
+		swap(stacks, 'A');
+		rotate(stacks, "RA");
 	}
 	else if (v1 < v2 && v1 > v3 && v2 > v3)
-		r_rotate(stacks, &stacks->a, "rra\n");
+		rotate(stacks, "RRA");
 }
 
-void	sort4(t_stacks *stacks)
+void	sort4(t_sck *stacks)
 {
-	int	max;
-	int	i;
-
-	i = -1;
-	max = stacks->a.value[0];
-	while (++i < stacks->a.size)
-		if (stacks->a.value[i] < max)
-			max = stacks->a.value[i];
-	opti_rot(stacks, &stacks->a, max, 'A');
-	push_b(stacks);
+	opti_rot(stacks, stacks->min, 'A');
+	push_ab(stacks, 'B');
 	sort3(stacks);
-	push_a(stacks);
+	push_ab(stacks, 'A');
 }
 
-void	sort5(t_stacks *stacks)
+void	sort5(t_sck *stacks)
 {
 	int	top;
-	int	i;
 
-	i = -1;
-	top = stacks->a.value[0];
-	while (++i < stacks->a.size)
-		if (stacks->a.value[i] < top)
-			top = stacks->a.value[i];
-	opti_rot(stacks, &stacks->a, top, 'A');
-	push_b(stacks);
-	// print_stacks(*stacks);
-	top = stacks->a.value[0];
-	i = -1;
-	while (++i < stacks->a.size)
-		if (stacks->a.value[i] < top)
-			top = stacks->a.value[i];
-	opti_rot(stacks, &stacks->a, top, 'A');
-	push_b(stacks);
-	// print_stacks(*stacks);
+	top = stacks->a->data;
+	while (stacks->a)
+	{
+		if (stacks->a->data < top)
+			top = stacks->a->data;
+		stacks->a = stacks->a->next;
+	}
+	opti_rot(stacks, top, 'A');
+	push_ab(stacks, 'B');
+	top = stacks->a->data;
+	while (stacks->a)
+	{
+		if (stacks->a->data < top)
+			top = stacks->a->data;
+		stacks->a = stacks->a->next;
+	}
+	opti_rot(stacks, top, 'A');
+	push_ab(stacks, 'B');
 	sort3(stacks);
 	do_rule_nb(stacks, "PA", 2);
 }
 
-void	simple_sort(t_stacks *stacks)
+void	simple_sort(t_sck *stacks)
 {
-	if (stacks->sizemax == 2)
+	if (stacks->size_a == 2)
 		sort2(stacks);
-	else if (stacks->sizemax == 3)
+	else if (stacks->size_a == 3)
 		sort3(stacks);
-	else if (stacks->sizemax == 4)
+	else if (stacks->size_a == 4)
 		sort4(stacks);
-	else if (stacks->sizemax == 5)
+	else if (stacks->size_a == 5)
 		sort5(stacks);
 }
