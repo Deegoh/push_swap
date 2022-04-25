@@ -5,14 +5,14 @@ else
 	CHECKER = checker_Mac
 endif
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra -g #make-fsanitize=address
 SRC = push_swap.c\
 	  parse_arg.c\
 	  simple_sort.c\
 	  rules_utils.c\
 	  print_utils.c\
 	  nodes_utils.c\
-	  nodes_utils2.c\
+	  nodes_ultils2.c\
 	  rules_node.c\
 	  # \
 	  rules_single.c\
@@ -22,7 +22,7 @@ LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-ARG1= 3 2 1 4
+ARG1= -1 3 2 1 0
 OBJ = $(SRC:.c=.o)
 .PHONY: all clean fclean re libft
 

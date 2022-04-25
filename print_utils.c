@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 18:19:27 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:53:32 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,9 @@ int	check_sort(t_sck stacks)
 // from the given node
 void	print_list(t_node *node)
 {
-	t_node	*last;
-
 	while (node != NULL)
 	{
 		ft_printf("%d\n", node->data);
-		last = node;
 		node = node->next;
 	}
 	ft_printf("\n");

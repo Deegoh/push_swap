@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 18:59:53 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:12:01 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,12 @@ void	set_min_max(t_sck *stacks)
 
 int	main(int ac, char *av[])
 {
-	t_stacks	stacks;
 	t_sck		sck;
 
 	if (ac == 1)
 		return (EXIT_FAILURE);
-	stacks = init_stacks(ac, av);
-	sck = init_list(stacks);
-	stacks.op = ft_strdup("");
+	sck = init_list(init_stacks(ac, av));
+	sck.op = ft_strdup("");
 	if (check_sort(sck))
 	{
 		if (sck.size_a <= 5)
@@ -75,6 +73,7 @@ int	main(int ac, char *av[])
 			// customsort(&stacks);
 		}
 	}
-	print_stacks(sck);
+	// print_stacks(sck);
+	ft_printf("%s", sck.op);
 	return (EXIT_SUCCESS);
 }

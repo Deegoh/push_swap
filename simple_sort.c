@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 19:56:03 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:08:42 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,28 @@ void	sort4(t_sck *stacks)
 
 void	sort5(t_sck *stacks)
 {
-	int	top;
+	int		min;
+	t_node	*tmp;
 
-	top = stacks->a->data;
-	while (stacks->a)
+	min = stacks->a->data;
+	tmp = stacks->a;
+	while (tmp)
 	{
-		if (stacks->a->data < top)
-			top = stacks->a->data;
-		stacks->a = stacks->a->next;
+		if (tmp->data < min)
+			min = tmp->data;
+		tmp = tmp->next;
 	}
-	opti_rot(stacks, top, 'A');
+	opti_rot(stacks, min, 'A');
 	push_ab(stacks, 'B');
-	top = stacks->a->data;
-	while (stacks->a)
+	min = stacks->a->data;
+	tmp = stacks->a;
+	while (tmp)
 	{
-		if (stacks->a->data < top)
-			top = stacks->a->data;
-		stacks->a = stacks->a->next;
+		if (tmp->data < min)
+			min = tmp->data;
+		tmp = tmp->next;
 	}
-	opti_rot(stacks, top, 'A');
+	opti_rot(stacks, min, 'A');
 	push_ab(stacks, 'B');
 	sort3(stacks);
 	do_rule_nb(stacks, "PA", 2);
