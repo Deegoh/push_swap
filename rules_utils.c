@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:47:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 19:56:36 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/27 23:44:02 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void	opti_rot(t_sck *stacks, int value, char c)
 	}
 	if (i == 0)
 		return ;
-	if (c == 'A' && i < i - stacks->size_a)
+	if (c == 'A' && i < -(i - stacks->size_a))
 		do_rule_nb(stacks, "RA", i);
-	else if (c == 'A' && i > i - stacks->size_a)
+	else if (c == 'A' && i >= -(i - stacks->size_a))
 		do_rule_nb(stacks, "RRA", i - stacks->size_a);
-	else if (c == 'B' && i < i - stacks->size_a)
+	else if (c == 'B' && i < (i - stacks->size_b))
 		do_rule_nb(stacks, "RB", i);
-	else if (c == 'B' && i > i - stacks->size_b)
+	else if (c == 'B' && i >= (i - stacks->size_b))
 		do_rule_nb(stacks, "RRB", i - stacks->size_b);
 }
 

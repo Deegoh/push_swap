@@ -1,6 +1,6 @@
 NAME = push_swap
 ifeq (uname,Linux)
-	CHECKER = checkermake_linux
+	CHECKER = checker_linux
 else
 	CHECKER = checker_Mac
 endif
@@ -22,7 +22,7 @@ LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-ARG1= -1 3 2 1 0
+ARG1= 1 0 2 -1 3 
 OBJ = $(SRC:.c=.o)
 .PHONY: all clean fclean re libft
 
