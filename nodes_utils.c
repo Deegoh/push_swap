@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:18:37 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 20:02:49 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:14:52 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,3 +89,5 @@ t_node	*last_node(t_node *root)
 		root = root->next;
 	return (root);
 }
+
+

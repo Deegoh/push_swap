@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/27 23:44:52 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/28 17:37:31 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,90 @@ t_sck	init_list(t_stacks	stacks)
 	return (sck);
 }
 
-void	customsort(t_stacks *stacks)
+int	is_between_value(int value, int a, int z)
 {
-	(void)stacks;
+	if (value >= a && value <= z)
+		return (1);
+	return (0);
+}
+
+int	find_opti_top(t_sck *stacks, int a, int z, char c)
+{
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	if (c == 'A')
+		tmp = stacks->a;
+	else
+		tmp = stacks->b;
+	while (tmp)
+	{
+		if (is_between_value(tmp->data, a, z))
+			break ;
+		tmp = tmp->next;
+		i++;
+	}
+	tmp = first_node(tmp);
+	return (i);
+}
+
+int	find_opti_bot(t_sck *stacks, int a, int z, char c)
+{
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	if (c == 'A')
+		tmp = last_node(stacks->a);
+	else
+		tmp = last_node(stacks->b);
+	while (tmp)
+	{
+		if (is_between_value(tmp->data, a, z))
+			break ;
+		tmp = tmp->prev;
+		i++;
+	}
+	tmp = first_node(tmp);
+	return (i);
+}
+
+int	find_value_between(t_sck *stacks, int a, int z, char c)
+{
+	int		i;
+	int		j;
+
+	i = find_opti_top(stacks, a, z, c);
+	j = find_opti_bot(stacks, a, z, c);
+	stacks->a = first_node(stacks->a);
+	if (i < j)
+		return (count_until_index(stacks->a, i, 'T')->data);
+	return (count_until_index(stacks->a, j, 'B')->data);
+}
+
+void	customsort(t_sck *stacks)
+{
+	int		a;
+	int		z;
+	int		count;
+
+	a = 0;
+	z = 1;
+	count = 0;
+	while (stacks->size_a)
+	{
+		while (count < 10)
+		{
+			opti_rot(stacks, find_value_between(stacks, a * 10, z * 10, 'A'), 'A');
+			push_ab(stacks, 'B');
+			count++;
+		}
+		count = 0;
+		a++;
+		z++;
+	}
+	// print_stacks(*stacks, 100);
 }
 
 void	set_min_max(t_sck *stacks)
@@ -70,10 +151,10 @@ int	main(int ac, char *av[])
 			simple_sort(&stacks);
 		else
 		{
-			// customsort(&stacks);
+			customsort(&stacks);
 		}
 	}
-	// print_stacks(stacks);
-	ft_printf("%s", stacks.op);
+	// print_stacks(stacks, 100);
+	// ft_printf("%s", stacks.op);
 	return (EXIT_SUCCESS);
 }

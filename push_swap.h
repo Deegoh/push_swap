@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 22:55:33 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/28 17:29:58 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		simple_sort(t_sck *stacks);
 
 void		error_exit(void);
 void		print_arr(int arr[], int n);
-void		print_stacks(t_sck stacks);
+void		print_stacks(t_sck stacks, int nbr);
 int			check_sort(t_sck	stacks);
 void		print_list(t_node *node);
 
@@ -85,6 +85,8 @@ void		rotate(t_sck *stacks, char *str);
 void		push_ab(t_sck *stacks, char c);
 
 int			count_nodes(t_node *root);
-int			count_until(t_node *root, int value);
+int			count_until_value(t_node *root, int value);
+t_node		*first_node(t_node *root);
+t_node		*count_until_index(t_node *root, int index, char c);
 
 #endif

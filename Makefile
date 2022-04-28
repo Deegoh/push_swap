@@ -1,11 +1,11 @@
 NAME = push_swap
-ifeq (uname,Linux)
-	CHECKER = checker_linux
-else
+ifeq ($(shell uname),Darwin)
 	CHECKER = checker_Mac
+else
+	CHECKER = checker_linux
 endif
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g #make-fsanitize=address
+CFLAGS = -Werror -Wall -Wextra -g #-fsanitize=address
 SRC = push_swap.c\
 	  parse_arg.c\
 	  simple_sort.c\
@@ -22,7 +22,7 @@ LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-ARG1= 1 0 2 -1 3 
+ARG1= 10 5 9 4 8 3 6 1 7 2
 OBJ = $(SRC:.c=.o)
 .PHONY: all clean fclean re libft
 
@@ -47,6 +47,8 @@ test: all
 	cp $(NAME) ../push_swap_tester/.
 	bash ../push_swap_tester/tester.sh
 run: all
-	./$(NAME) $(ARG1)
+	./$(NAME) $(ARG)
+checker: all
+	./$(NAME) $(ARG) | ./$(CHECKER) $(ARG)
 lldb: all
 	lldb $(NAME) $(ARG)

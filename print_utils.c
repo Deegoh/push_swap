@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 21:53:32 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:33:03 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,15 @@ void	error_exit(void)
 	exit (EXIT_FAILURE);
 }
 
-void	print_stacks(t_sck stacks)
+void	print_stacks(t_sck stacks, int nbr)
 {
 	t_sck	tmp;
 	int		j;
 
 	tmp = stacks;
-	// ft_printf("\nstacks sizemax:%d\n", stacks.sizemax);
 	ft_printf("min[%d] max[%d]\n", stacks.min, stacks.max);
-	// if (stacks.pivot)
-	// 	ft_printf("pivot[%d]\n", stacks.pivot->data);
 	ft_printf("A size[%d] B size[%d]\n", stacks.size_a, stacks.size_b);
-	// ft_printf("%p\n", tmp.a);
-	while (tmp.a || tmp.b)
+	while ((tmp.a || tmp.b) && nbr--)
 	{
 		if (tmp.a)
 		{
