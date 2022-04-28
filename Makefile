@@ -22,7 +22,7 @@ LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
 ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
-ARG1= 10 5 9 4 8 3 6 1 7 2
+ARG1= -42 -22 22 -7 18 -49 -30 6 5 8 33 50 48 10 0 9 15 -16 -18 16 -33 11 23 37 -44 -37 40 -38 43 -8 4 -15 -21 -1 -40 -17 -13 29 26 32 -4 49 -45 -27 38 -20 -46 19 42 -32 -12 -2 -11 12 -3 31 44 -10 -41 -6 -19 3 28 7 17 -29 25 13 46 27 -26 -48 2 -35 -31 14 39 -14 -5 -25 20 30 -28 36 -9 -24 21 -39 -36 45 1 24 34 41 47 -23 -47 -34 35 -43 
 OBJ = $(SRC:.c=.o)
 .PHONY: all clean fclean re libft
 
@@ -47,7 +47,7 @@ test: all
 	cp $(NAME) ../push_swap_tester/.
 	bash ../push_swap_tester/tester.sh
 run: all
-	./$(NAME) $(ARG)
+	./$(NAME) $(ARG1)
 checker: all
 	./$(NAME) $(ARG) | ./$(CHECKER) $(ARG)
 lldb: all

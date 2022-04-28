@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 20:03:09 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/28 17:35:07 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:41:09 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,12 @@ int	count_until_value(t_node *root, int value)
 
 t_node	*count_until_index(t_node *root, int index, char c)
 {
-	int		i;
 	t_node	*tmp;
 
 	if (c == 'T')
 		tmp = root;
 	else
 		tmp = last_node(root);
-	i = 0;
 	while (tmp && index--)
 	{
 		if (c == 'T')

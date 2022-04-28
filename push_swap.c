@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/28 17:37:31 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:57:03 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_sck	init_list(t_stacks	stacks)
 	sck.size_b = 0;
 	sck.top_a = sck.a;
 	sck.end_a = last_node(sck.a);
-	set_min_max(&sck);
+	set_min_max(&sck, 'A');
 	return (sck);
 }
 
@@ -98,8 +98,9 @@ void	customsort(t_sck *stacks)
 	int		z;
 	int		count;
 
-	a = 0;
-	z = 1;
+	a = (stacks->min - 10) / 10;
+	z = a + 1;
+	// ft_printf("min[%d] max[%d] a[%d] z[%d]\n", stacks->min, stacks->max, a, z);
 	count = 0;
 	while (stacks->size_a)
 	{
@@ -114,15 +115,29 @@ void	customsort(t_sck *stacks)
 		z++;
 	}
 	// print_stacks(*stacks, 100);
+	z = stacks->max;
+	while (stacks->size_b)
+	{
+		opti_rot(stacks, stacks->max, 'B');
+		push_ab(stacks, 'A');
+		set_min_max(stacks, 'B');
+	}
+	
+	// print_stacks(*stacks, 100);
 }
 
-void	set_min_max(t_sck *stacks)
+void	set_min_max(t_sck *stacks, char c)
 {
 	t_node	*tmp;
 	int		min;
 	int		max;
 
-	tmp = stacks->a;
+	if ('A' == c)
+		tmp = first_node(stacks->a);
+	else
+		tmp = first_node(stacks->b);
+	if (!tmp)
+		return ;
 	max = tmp->data;
 	min = tmp->data;
 	while (tmp)
@@ -155,6 +170,6 @@ int	main(int ac, char *av[])
 		}
 	}
 	// print_stacks(stacks, 100);
-	// ft_printf("%s", stacks.op);
+	ft_printf("%s", stacks.op);
 	return (EXIT_SUCCESS);
 }

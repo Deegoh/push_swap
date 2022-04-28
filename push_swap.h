@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/28 17:29:58 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:10:07 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_stacks
 }			t_stacks;
 
 t_stacks	init_stacks(int ac, char *av[]);
-void		set_min_max(t_sck *stacks);
+void		set_min_max(t_sck *stacks, char c);
 
 void		check_rule(t_sck *stacks, char *str);
 void		do_rule_nb(t_sck *stacks, char *str, int nb);
