@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/28 22:57:03 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 19:21:50 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,130 +26,37 @@ t_sck	init_list(t_stacks	stacks)
 	sck.size_b = 0;
 	sck.top_a = sck.a;
 	sck.end_a = last_node(sck.a);
-	set_min_max(&sck, 'A');
+	sck.max = find_max(&sck, 'A');
+	sck.min = find_min(&sck, 'A');
 	return (sck);
 }
 
-int	is_between_value(int value, int a, int z)
+void	customsort(t_sck *s)
 {
-	if (value >= a && value <= z)
-		return (1);
-	return (0);
-}
+	int	z;
+	int	count;
+	int	min;
 
-int	find_opti_top(t_sck *stacks, int a, int z, char c)
-{
-	int		i;
-	t_node	*tmp;
-
-	i = 0;
-	if (c == 'A')
-		tmp = stacks->a;
-	else
-		tmp = stacks->b;
-	while (tmp)
-	{
-		if (is_between_value(tmp->data, a, z))
-			break ;
-		tmp = tmp->next;
-		i++;
-	}
-	tmp = first_node(tmp);
-	return (i);
-}
-
-int	find_opti_bot(t_sck *stacks, int a, int z, char c)
-{
-	int		i;
-	t_node	*tmp;
-
-	i = 0;
-	if (c == 'A')
-		tmp = last_node(stacks->a);
-	else
-		tmp = last_node(stacks->b);
-	while (tmp)
-	{
-		if (is_between_value(tmp->data, a, z))
-			break ;
-		tmp = tmp->prev;
-		i++;
-	}
-	tmp = first_node(tmp);
-	return (i);
-}
-
-int	find_value_between(t_sck *stacks, int a, int z, char c)
-{
-	int		i;
-	int		j;
-
-	i = find_opti_top(stacks, a, z, c);
-	j = find_opti_bot(stacks, a, z, c);
-	stacks->a = first_node(stacks->a);
-	if (i < j)
-		return (count_until_index(stacks->a, i, 'T')->data);
-	return (count_until_index(stacks->a, j, 'B')->data);
-}
-
-void	customsort(t_sck *stacks)
-{
-	int		a;
-	int		z;
-	int		count;
-
-	a = (stacks->min - 10) / 10;
-	z = a + 1;
-	// ft_printf("min[%d] max[%d] a[%d] z[%d]\n", stacks->min, stacks->max, a, z);
+	split_by_chunck(s, s->size_a / 250);
+	z = 1;
 	count = 0;
-	while (stacks->size_a)
+	min = s->min;
+	while (s->size_a)
 	{
-		while (count < 10)
+		while (count < 10 && s->size_a)
 		{
-			opti_rot(stacks, find_value_between(stacks, a * 10, z * 10, 'A'), 'A');
-			push_ab(stacks, 'B');
+			opti_rot(s, find_value_between(s, min, min + z * 10 - 1, 'A'), 'A');
+			push_ab(s, 'B');
 			count++;
 		}
 		count = 0;
-		a++;
 		z++;
 	}
-	// print_stacks(*stacks, 100);
-	z = stacks->max;
-	while (stacks->size_b)
+	while (s->size_b > 0)
 	{
-		opti_rot(stacks, stacks->max, 'B');
-		push_ab(stacks, 'A');
-		set_min_max(stacks, 'B');
+		opti_rot(s, find_max(s, 'B'), 'B');
+		push_ab(s, 'A');
 	}
-	
-	// print_stacks(*stacks, 100);
-}
-
-void	set_min_max(t_sck *stacks, char c)
-{
-	t_node	*tmp;
-	int		min;
-	int		max;
-
-	if ('A' == c)
-		tmp = first_node(stacks->a);
-	else
-		tmp = first_node(stacks->b);
-	if (!tmp)
-		return ;
-	max = tmp->data;
-	min = tmp->data;
-	while (tmp)
-	{
-		if (max < tmp->data)
-			max = tmp->data;
-		if (min > tmp->data)
-			min = tmp->data;
-		tmp = tmp->next;
-	}
-	stacks->max = max;
-	stacks->min = min;
 }
 
 int	main(int ac, char *av[])
@@ -169,7 +76,6 @@ int	main(int ac, char *av[])
 			customsort(&stacks);
 		}
 	}
-	// print_stacks(stacks, 100);
 	ft_printf("%s", stacks.op);
 	return (EXIT_SUCCESS);
 }

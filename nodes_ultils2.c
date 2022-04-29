@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 20:03:09 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/28 21:41:09 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 17:03:28 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_node	*count_until_index(t_node *root, int index, char c)
 		tmp = root;
 	else
 		tmp = last_node(root);
+	if (!tmp)
+		return (NULL);
 	while (tmp && index--)
 	{
 		if (c == 'T')
@@ -58,9 +60,42 @@ t_node	*count_until_index(t_node *root, int index, char c)
 	return (tmp);
 }
 
-t_node	*first_node(t_node *root)
+int	find_max(t_sck *stacks, char c)
 {
-	while (root && root->prev)
-		root = root->prev;
-	return (root);
+	int		value;
+	t_node	*tmp;
+
+	if (c == 'A')
+		tmp = stacks->a;
+	else
+		tmp = stacks->b;
+	value = tmp->data;
+	while (tmp)
+	{
+		if (value < tmp->data)
+			value = tmp->data;
+		tmp = tmp->next;
+	}
+	tmp = first_node(tmp);
+	return (value);
+}
+
+int	find_min(t_sck *stacks, char c)
+{
+	int		value;
+	t_node	*tmp;
+
+	if (c == 'A')
+		tmp = stacks->a;
+	else
+		tmp = stacks->b;
+	value = tmp->data;
+	while (tmp)
+	{
+		if (value > tmp->data)
+			value = tmp->data;
+		tmp = tmp->next;
+	}
+	tmp = first_node(tmp);
+	return (value);
 }

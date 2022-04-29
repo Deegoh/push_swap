@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:34:05 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 22:59:08 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 17:02:26 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,34 @@ void	push_ab(t_sck *stacks, char c)
 		stacks->size_b++;
 		stacks->op = ft_strjoin(stacks->op, "pb\n");
 	}
+}
+
+void	check_rule(t_sck *stacks, char *str)
+{
+	if (!ft_strncmp(str, "PA", ft_strlen(str)))
+		push_ab(stacks, 'A');
+	else if (!ft_strncmp(str, "PB", ft_strlen(str)))
+		push_ab(stacks, 'B');
+	else if (!ft_strncmp(str, "SA", ft_strlen(str)))
+		swap(stacks, 'A');
+	else if (!ft_strncmp(str, "SB", ft_strlen(str)))
+		swap(stacks, 'B');
+	else if (!ft_strncmp(str, "RA", ft_strlen(str)))
+		rotate(stacks, "RA");
+	else if (!ft_strncmp(str, "RB", ft_strlen(str)))
+		rotate(stacks, "RB");
+	else if (!ft_strncmp(str, "RRA", ft_strlen(str)))
+		rotate(stacks, "RRA");
+	else if (!ft_strncmp(str, "RRB", ft_strlen(str)))
+		rotate(stacks, "RRB");
+}
+
+void	do_rule_nb(t_sck *stacks, char *str, int nb)
+{
+	if (nb < 0)
+		nb = -nb;
+	if (nb == 0)
+		return ;
+	while (nb--)
+		check_rule(stacks, str);
 }

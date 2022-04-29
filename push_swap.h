@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/28 22:10:07 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 19:01:00 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_stacks
 }			t_stacks;
 
 t_stacks	init_stacks(int ac, char *av[]);
-void		set_min_max(t_sck *stacks, char c);
 
 void		check_rule(t_sck *stacks, char *str);
 void		do_rule_nb(t_sck *stacks, char *str, int nb);
@@ -88,5 +87,13 @@ int			count_nodes(t_node *root);
 int			count_until_value(t_node *root, int value);
 t_node		*first_node(t_node *root);
 t_node		*count_until_index(t_node *root, int index, char c);
+int			find_max(t_sck *stacks, char c);
+int			find_min(t_sck *stacks, char c);
+void		split_by_chunck(t_sck *s, int chunck);
+int			find_opti_top(t_sck *stacks, int a, int z, char c);
+int			find_opti_bot(t_sck *stacks, int a, int z, char c);
+int			is_between_value(int value, int a, int z);
+int			find_value_between(t_sck *stacks, int a, int z, char c);
+int			get_mean(t_sck	*stacks, char c);
 
 #endif

@@ -6,38 +6,17 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:47:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/27 23:44:02 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 17:18:19 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_rule(t_sck *stacks, char *str)
+t_node	*first_node(t_node *root)
 {
-	if (!ft_strncmp(str, "PA", ft_strlen(str)))
-		push_ab(stacks, 'A');
-	else if (!ft_strncmp(str, "PB", ft_strlen(str)))
-		push_ab(stacks, 'B');
-	else if (!ft_strncmp(str, "SA", ft_strlen(str)))
-		swap(stacks, 'A');
-	else if (!ft_strncmp(str, "SB", ft_strlen(str)))
-		swap(stacks, 'B');
-	else if (!ft_strncmp(str, "RA", ft_strlen(str)))
-		rotate(stacks, "RA");
-	else if (!ft_strncmp(str, "RB", ft_strlen(str)))
-		rotate(stacks, "RB");
-	else if (!ft_strncmp(str, "RRA", ft_strlen(str)))
-		rotate(stacks, "RRA");
-	else if (!ft_strncmp(str, "RRB", ft_strlen(str)))
-		rotate(stacks, "RRB");
-}
-
-void	do_rule_nb(t_sck *stacks, char *str, int nb)
-{
-	if (nb < 0)
-		nb = -nb;
-	while (nb--)
-		check_rule(stacks, str);
+	while (root && root->prev)
+		root = root->prev;
+	return (root);
 }
 
 void	opti_rot(t_sck *stacks, int value, char c)
@@ -58,14 +37,14 @@ void	opti_rot(t_sck *stacks, int value, char c)
 	}
 	if (i == 0)
 		return ;
-	if (c == 'A' && i < -(i - stacks->size_a))
+	if (c == 'A' && i <= -(i - stacks->size_a))
 		do_rule_nb(stacks, "RA", i);
-	else if (c == 'A' && i >= -(i - stacks->size_a))
-		do_rule_nb(stacks, "RRA", i - stacks->size_a);
-	else if (c == 'B' && i < (i - stacks->size_b))
+	else if (c == 'A' && i > -(i - stacks->size_a))
+		do_rule_nb(stacks, "RRA", -(i - stacks->size_a));
+	else if (c == 'B' && i <= -(i - stacks->size_b))
 		do_rule_nb(stacks, "RB", i);
-	else if (c == 'B' && i >= (i - stacks->size_b))
-		do_rule_nb(stacks, "RRB", i - stacks->size_b);
+	else if (c == 'B' && i > -(i - stacks->size_b))
+		do_rule_nb(stacks, "RRB", -(i - stacks->size_b));
 }
 
 long	ft_atol(const char *str)
@@ -94,4 +73,46 @@ long	ft_atol(const char *str)
 	if (count > 19 && sign == -1)
 		return (0);
 	return (res * sign);
+}
+
+int	find_opti_top(t_sck *stacks, int a, int z, char c)
+{
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	if (c == 'A')
+		tmp = stacks->a;
+	else
+		tmp = stacks->b;
+	while (tmp)
+	{
+		if (is_between_value(tmp->data, a, z))
+			break ;
+		tmp = tmp->next;
+		i++;
+	}
+	tmp = first_node(tmp);
+	return (i);
+}
+
+int	find_opti_bot(t_sck *stacks, int a, int z, char c)
+{
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	if (c == 'A')
+		tmp = last_node(stacks->a);
+	else
+		tmp = last_node(stacks->b);
+	while (tmp)
+	{
+		if (is_between_value(tmp->data, a, z))
+			break ;
+		tmp = tmp->prev;
+		i++;
+	}
+	tmp = first_node(tmp);
+	return (i);
 }
