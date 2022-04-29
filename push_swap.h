@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 19:01:00 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:06:03 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ typedef struct s_sck
 	int		size_b;
 	int		max;
 	int		min;
+	int		z;
+	int		count;
+	int		range;
+	int		btn;
 	char	*op;
 	t_node	*a;
 	t_node	*b;
-	t_node	*top_a;
-	t_node	*end_a;
-	t_node	*top_b;
-	t_node	*end_b;
 }			t_sck;
 
 typedef struct s_stack
@@ -45,13 +45,9 @@ typedef struct s_stack
 typedef struct s_stacks
 {
 	int		sizemax;
-	char	*op;
-	t_node	*pivot;
-	int		nbr;
 	int		max;
 	int		min;
 	t_stack	a;
-	t_stack	b;
 }			t_stacks;
 
 t_stacks	init_stacks(int ac, char *av[]);
@@ -93,7 +89,8 @@ void		split_by_chunck(t_sck *s, int chunck);
 int			find_opti_top(t_sck *stacks, int a, int z, char c);
 int			find_opti_bot(t_sck *stacks, int a, int z, char c);
 int			is_between_value(int value, int a, int z);
-int			find_value_between(t_sck *stacks, int a, int z, char c);
+int			data_in_range(t_sck *stacks, int a, int z, char c);
 int			get_mean(t_sck	*stacks, char c);
+t_sck		init_list(t_stacks	stacks);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:15:21 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/25 22:52:51 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:08:03 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,5 @@ t_stacks	init_stacks(int ac, char **av)
 	free(split);
 	stacks.a.size = stacks.sizemax;
 	find_dup(stacks.a.value, stacks.a.size);
-	stacks.b.value = ft_calloc(sizeof(stacks.b.value), stacks.sizemax);
-	stacks.b.size = 0;
 	return (stacks);
 }

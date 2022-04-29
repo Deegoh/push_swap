@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:55:43 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 19:04:33 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:00:45 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	split_by_chunck(t_sck *s, int chunck)
 	int	mean;
 
 	if (chunck <= 1)
-		return ;
+		chunck = 2;
 	mean = get_mean(s, 'A');
 	len = s->size_a / chunck;
 	while (s->size_a > len)
 	{
-		opti_rot(s, find_value_between(s, s->min, mean, 'A'), 'A');
+		opti_rot(s, data_in_range(s, s->min, mean, 'A'), 'A');
 		push_ab(s, 'B');
 	}
 	while (s->size_b)
@@ -60,7 +60,7 @@ int	is_between_value(int value, int a, int z)
 	return (0);
 }
 
-int	find_value_between(t_sck *stacks, int a, int z, char c)
+int	data_in_range(t_sck *stacks, int a, int z, char c)
 {
 	int		i;
 	int		j;

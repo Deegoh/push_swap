@@ -6,53 +6,43 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 19:21:50 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:03:07 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_sck	init_list(t_stacks	stacks)
+int	ft_bool(int btn)
 {
-	t_sck	sck;
-	int		i;
-
-	i = -1;
-	sck.a = NULL;
-	sck.b = NULL;
-	while (++i < stacks.a.size)
-		append(&sck.a, stacks.a.value[i]);
-	sck.size_a = count_nodes(sck.a);
-	sck.size_b = 0;
-	sck.top_a = sck.a;
-	sck.end_a = last_node(sck.a);
-	sck.max = find_max(&sck, 'A');
-	sck.min = find_min(&sck, 'A');
-	return (sck);
+	if (!btn)
+		return (1);
+	else
+		return (0);
 }
 
-void	customsort(t_sck *s)
+void	custom_sort(t_sck *s)
 {
-	int	z;
-	int	count;
-	int	min;
-
-	split_by_chunck(s, s->size_a / 250);
-	z = 1;
-	count = 0;
-	min = s->min;
+	split_by_chunck(s, s->size_a / 150);
+	s->count = 0;
+	s->range = 5 + (s->size_a / 100);
+	s->min = s->min - 1;
+	s->z = s->min + 1;
+	s->btn = 0;
 	while (s->size_a)
 	{
-		while (count < 10 && s->size_a)
+		while (s->count < s->range && s->size_a)
 		{
-			opti_rot(s, find_value_between(s, min, min + z * 10 - 1, 'A'), 'A');
+			opti_rot(s, data_in_range(s, s->min, s->z + s->range, 'A'), 'A');
 			push_ab(s, 'B');
-			count++;
+			if (s->btn)
+				rotate(s, "RB");
+			s->count++;
+			s->z++;
 		}
-		count = 0;
-		z++;
+		s->count = 0;
+		s->btn = ft_bool(s->btn);
 	}
-	while (s->size_b > 0)
+	while (s->size_b)
 	{
 		opti_rot(s, find_max(s, 'B'), 'B');
 		push_ab(s, 'A');
@@ -72,9 +62,7 @@ int	main(int ac, char *av[])
 		if (stacks.size_a <= 5)
 			simple_sort(&stacks);
 		else
-		{
-			customsort(&stacks);
-		}
+			custom_sort(&stacks);
 	}
 	ft_printf("%s", stacks.op);
 	return (EXIT_SUCCESS);
