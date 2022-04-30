@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 21:01:45 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/30 15:23:21 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_sck	init_list(t_stacks	stacks)
 	sck.b = NULL;
 	while (++i < stacks.a.size)
 		append(&sck.a, stacks.a.value[i]);
+	free(stacks.a.value);
 	sck.size_a = count_nodes(sck.a);
 	sck.size_b = 0;
 	sck.max = find_max(&sck, 'A');

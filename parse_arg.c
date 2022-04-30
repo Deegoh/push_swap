@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:15:21 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 21:08:03 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/30 15:21:14 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,16 @@ static int	*split_to_arr(char **split, int len)
 	int	*stack;
 	int	i;
 
-	stack = ft_calloc(sizeof(stack), len);
+	stack = calloc(sizeof(int *), len);
 	i = -1;
 	while (++i < len)
 	{
 		if (ft_atol(split[i]) > INT_MAX || ft_atol(split[i]) < INT_MIN)
 			error_exit();
 		stack[i] = ft_atoi(split[i]);
+		free(split[i]);
 	}
+	free(split);
 	return (stack);
 }
 
@@ -80,17 +82,12 @@ t_stacks	init_stacks(int ac, char **av)
 	char		*arg;
 	char		**split;
 	t_stacks	stacks;
-	int			i;
 
 	arg = merge_arg(av, ac);
 	split = ft_split(arg, ' ');
+	free(arg);
 	stacks.sizemax = arrlen(split);
 	stacks.a.value = split_to_arr(split, stacks.sizemax);
-	free(arg);
-	i = 0;
-	while (i < stacks.sizemax)
-		free(split[i++]);
-	free(split);
 	stacks.a.size = stacks.sizemax;
 	find_dup(stacks.a.value, stacks.a.size);
 	return (stacks);

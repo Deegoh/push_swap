@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:47:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 17:18:19 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/30 19:31:42 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_node	*first_node(t_node *root)
 	return (root);
 }
 
-void	opti_rot(t_sck *stacks, int value, char c)
+int	opti_rot(t_sck *stacks, int value, char c)
 {
 	int		i;
 	t_node	*tmp;
@@ -36,15 +36,16 @@ void	opti_rot(t_sck *stacks, int value, char c)
 		i++;
 	}
 	if (i == 0)
-		return ;
+		return (0);
 	if (c == 'A' && i <= -(i - stacks->size_a))
-		do_rule_nb(stacks, "RA", i);
+		return (do_rule_nb(stacks, "RA", i));
 	else if (c == 'A' && i > -(i - stacks->size_a))
-		do_rule_nb(stacks, "RRA", -(i - stacks->size_a));
+		return (do_rule_nb(stacks, "RRA", (i - stacks->size_a)));
 	else if (c == 'B' && i <= -(i - stacks->size_b))
-		do_rule_nb(stacks, "RB", i);
+		return (do_rule_nb(stacks, "RB", i));
 	else if (c == 'B' && i > -(i - stacks->size_b))
-		do_rule_nb(stacks, "RRB", -(i - stacks->size_b));
+		return (do_rule_nb(stacks, "RRB", (i - stacks->size_b)));
+	return (0);
 }
 
 long	ft_atol(const char *str)

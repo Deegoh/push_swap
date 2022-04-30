@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:34:05 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 17:02:26 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/30 19:31:02 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	swap(t_sck *stacks, char c)
 	{
 		push(&stacks->a, stacks->a->next->data);
 		delete_node(&stacks->a, stacks->a->next->next);
-		stacks->op = ft_strjoin(stacks->op, "sa\n");
+		join_op(stacks, "sa\n");
 	}
 	if (c == 'B' && stacks->size_b > 1)
 	{
 		push(&stacks->b, stacks->b->next->data);
 		delete_node(&stacks->b, stacks->b->next->next);
-		stacks->op = ft_strjoin(stacks->op, "sb\n");
+		join_op(stacks, "sb\n");
 	}
 }
 
@@ -34,25 +34,25 @@ void	rotate(t_sck *stacks, char *str)
 	{
 		append(&stacks->a, stacks->a->data);
 		delete_node(&stacks->a, stacks->a);
-		stacks->op = ft_strjoin(stacks->op, "ra\n");
+		join_op(stacks, "ra\n");
 	}
 	if (!ft_strncmp(str, "RB", ft_strlen(str)) && stacks->size_b > 1)
 	{
 		append(&stacks->b, stacks->b->data);
 		delete_node(&stacks->b, stacks->b);
-		stacks->op = ft_strjoin(stacks->op, "rb\n");
+		join_op(stacks, "rb\n");
 	}
 	if (!ft_strncmp(str, "RRA", ft_strlen(str)) && stacks->size_a > 1)
 	{
 		push(&stacks->a, last_node(stacks->a)->data);
 		delete_node(&stacks->a, last_node(stacks->a));
-		stacks->op = ft_strjoin(stacks->op, "rra\n");
+		join_op(stacks, "rra\n");
 	}
 	if (!ft_strncmp(str, "RRB", ft_strlen(str)) && stacks->size_b > 1)
 	{
 		push(&stacks->b, last_node(stacks->b)->data);
 		delete_node(&stacks->b, last_node(stacks->b));
-		stacks->op = ft_strjoin(stacks->op, "rrb\n");
+		join_op(stacks, "rrb\n");
 	}
 }
 
@@ -64,7 +64,7 @@ void	push_ab(t_sck *stacks, char c)
 		delete_node(&stacks->b, stacks->b);
 		stacks->size_a++;
 		stacks->size_b--;
-		stacks->op = ft_strjoin(stacks->op, "pa\n");
+		join_op(stacks, "pa\n");
 	}
 	if (c == 'B' && stacks->size_a > 0)
 	{
@@ -72,7 +72,7 @@ void	push_ab(t_sck *stacks, char c)
 		delete_node(&stacks->a, stacks->a);
 		stacks->size_a--;
 		stacks->size_b++;
-		stacks->op = ft_strjoin(stacks->op, "pb\n");
+		join_op(stacks, "pb\n");
 	}
 }
 
@@ -96,12 +96,16 @@ void	check_rule(t_sck *stacks, char *str)
 		rotate(stacks, "RRB");
 }
 
-void	do_rule_nb(t_sck *stacks, char *str, int nb)
+int	do_rule_nb(t_sck *stacks, char *str, int nb)
 {
+	int	ret;
+
+	ret = nb;
 	if (nb < 0)
 		nb = -nb;
 	if (nb == 0)
-		return ;
+		return (0);
 	while (nb--)
 		check_rule(stacks, str);
+	return (ret);
 }

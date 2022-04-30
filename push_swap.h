@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 21:06:03 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/30 19:17:13 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ typedef struct s_stacks
 t_stacks	init_stacks(int ac, char *av[]);
 
 void		check_rule(t_sck *stacks, char *str);
-void		do_rule_nb(t_sck *stacks, char *str, int nb);
-void		opti_rot(t_sck *stacks, int value, char c);
+int			do_rule_nb(t_sck *stacks, char *str, int nb);
+int			opti_rot(t_sck *stacks, int value, char c);
 long		ft_atol(const char *str);
 
 void		sort2(t_sck *stacks);
@@ -92,5 +92,6 @@ int			is_between_value(int value, int a, int z);
 int			data_in_range(t_sck *stacks, int a, int z, char c);
 int			get_mean(t_sck	*stacks, char c);
 t_sck		init_list(t_stacks	stacks);
+void		join_op(t_sck *stacks, char *op);
 
 #endif

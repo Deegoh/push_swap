@@ -20,7 +20,7 @@ RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
-ARG =`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
+ARG =`ruby -e "puts (1..20).to_a.shuffle.join(' ')"`
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re libft v1 v2 test run wc checker lldb
@@ -47,6 +47,7 @@ test: all
 	bash ../push_swap_tester/tester.sh
 run: all
 	./$(NAME) $(ARG)
+
 wc: all
 	./$(NAME) $(ARG) | wc -l
 checker: all
