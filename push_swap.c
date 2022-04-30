@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/30 19:45:43 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/04/30 20:02:44 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,22 @@ void	video_sort(t_sck *s)
 {
 	int	a;
 	int	b;
+	int	topA;
+	int	topB;
+	int	botA;
+	int	botB;
 	do_rule_nb(s, "PB", 3);
 	// while (s->size_a)
 	// {
-		b = find_closest(s, s->a->data, 'B');
-		a = find_closest(s, s->b->data, 'A');
-		ft_printf("a[%d] topA[%d] endA[%d]\nb[%d] topB[%d] endB[%d]\n", a, find_opti_top(s, a, a, 'A'), find_opti_bot(s, a, a, 'A'),
-		 b, find_opti_top(s, b, b, 'B'), find_opti_bot(s, b, b, 'B'));
+		b = find_closest(s, s->b->data, 'A');
+		a = find_closest(s, s->a->data, 'B');
+		topA = find_opti_top(s, a, a, 'B');
+		topB = find_opti_top(s, b, b, 'A');
+		botA = find_opti_bot(s, a, a, 'B');
+		botB = find_opti_bot(s, b, b, 'A');
+		ft_printf("data[%d] a[%d] topA[%d] endA[%d]\ndata[%d] b[%d] topB[%d] endB[%d]\n",
+		 s->a->data, a, find_opti_top(s, a, a, 'B'), find_opti_bot(s, a, a, 'B'),
+		 s->b->data, b, find_opti_top(s, b, b, 'A'), find_opti_bot(s, b, b, 'A'));
 		// if (find_opti_top(s, find_closest(s, s->a->data, 'B'), 'B') == opti_rot(s, find_closest(s, s->b->data, 'A'), 'A'))
 		// 	{
 		// 		push_ab(s, 'B');
@@ -208,12 +217,12 @@ int	main(int ac, char *av[])
 		if (stacks.size_a <= 5)
 			simple_sort(&stacks);
 		else
-			custom_sort(&stacks);
-			// video_sort(&stacks);
+			// custom_sort(&stacks);
+			video_sort(&stacks);
 	}
-	// print_stacks(stacks, 500);
+	print_stacks(stacks, 500);
 	// ft_printf("%s", (stacks.op));
-	ft_printf("%s", opti_op(stacks.op));
+	// ft_printf("%s", opti_op(stacks.op));
 	free_all_nodes(&stacks);
 	return (EXIT_SUCCESS);
 }
