@@ -6,13 +6,13 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 12:15:21 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/30 15:21:14 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/01 21:33:28 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	find_dup(int	*stack_a, int len)
+void	find_dup(int *stack_a, int len)
 {
 	int	i;
 	int	j;
@@ -27,7 +27,7 @@ static void	find_dup(int	*stack_a, int len)
 	}
 }
 
-static int	arrlen(char **arr)
+int	arr_len(char **arr)
 {
 	int	count;
 
@@ -37,7 +37,7 @@ static int	arrlen(char **arr)
 	return (count);
 }
 
-static char	*merge_arg(char **arg, int ac)
+char	*merge_arg(char **arg, int ac)
 {
 	char	*ret;
 	char	*tmp;
@@ -59,7 +59,7 @@ static char	*merge_arg(char **arg, int ac)
 	return (ret);
 }
 
-static int	*split_to_arr(char **split, int len)
+int	*split_to_arr(char **split, int len)
 {
 	int	*stack;
 	int	i;
@@ -77,18 +77,17 @@ static int	*split_to_arr(char **split, int len)
 	return (stack);
 }
 
-t_stacks	init_stacks(int ac, char **av)
+int	check_sort(t_sck stacks)
 {
-	char		*arg;
-	char		**split;
-	t_stacks	stacks;
-
-	arg = merge_arg(av, ac);
-	split = ft_split(arg, ' ');
-	free(arg);
-	stacks.sizemax = arrlen(split);
-	stacks.a.value = split_to_arr(split, stacks.sizemax);
-	stacks.a.size = stacks.sizemax;
-	find_dup(stacks.a.value, stacks.a.size);
-	return (stacks);
+	stacks.a = stacks.a->next;
+	while (stacks.a && stacks.a->prev)
+	{
+		if (stacks.a->prev->data < stacks.a->data)
+		{
+			stacks.a = stacks.a->next;
+			continue ;
+		}
+		return (1);
+	}
+	return (0);
 }

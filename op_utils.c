@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rules_utils.c                                      :+:      :+:    :+:   */
+/*   op_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 12:47:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/30 19:31:42 by tpinto-m         ###   ########.fr       */
+/*   Created: 2022/05/01 21:23:55 by tpinto-m          #+#    #+#             */
+/*   Updated: 2022/05/01 22:25:15 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node	*first_node(t_node *root)
+void	join_op(t_sck *s, char *op)
 {
-	while (root && root->prev)
-		root = root->prev;
-	return (root);
+	char	*tmp;
+
+	tmp = s->op;
+	if ((!ft_strncmp(op, "ra\n", 3) && !ft_strncmp(s->l_op, "rb\n", 3))
+		|| (!ft_strncmp(op, "rb\n", 3) && !ft_strncmp(s->l_op, "ra\n", 3)))
+	{
+		free(s->l_op);
+		s->l_op = ft_strdup("rr\n");
+		op = "";
+	}
+	if ((!ft_strncmp(op, "rra\n", 4) && !ft_strncmp(s->l_op, "rrb\n", 4))
+		|| (!ft_strncmp(op, "rrb\n", 4) && !ft_strncmp(s->l_op, "rra\n", 4)))
+	{
+		free(s->l_op);
+		s->l_op = ft_strdup("rrr\n");
+		op = "";
+	}
+	s->op = ft_strjoin(s->op, s->l_op);
+	free(s->l_op);
+	s->l_op = ft_strdup(op);
+	free(tmp);
 }
 
 int	opti_rot(t_sck *stacks, int value, char c)
@@ -46,34 +64,6 @@ int	opti_rot(t_sck *stacks, int value, char c)
 	else if (c == 'B' && i > -(i - stacks->size_b))
 		return (do_rule_nb(stacks, "RRB", (i - stacks->size_b)));
 	return (0);
-}
-
-long	ft_atol(const char *str)
-{
-	int		i;
-	long	res;
-	int		sign;
-	int		count;
-
-	i = 0;
-	res = 0;
-	sign = 1;
-	count = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-		if (str[i++] == '-')
-			sign *= -1;
-	while (ft_isdigit(str[i]))
-	{
-		res = res * 10 + str[i++] - '0';
-		count++;
-	}
-	if (count > 19 && sign == 1)
-		return (sign * -1);
-	if (count > 19 && sign == -1)
-		return (0);
-	return (res * sign);
 }
 
 int	find_opti_top(t_sck *stacks, int a, int z, char c)
@@ -116,4 +106,11 @@ int	find_opti_bot(t_sck *stacks, int a, int z, char c)
 	}
 	tmp = first_node(tmp);
 	return (i);
+}
+
+int	is_between_value(int value, int a, int z)
+{
+	if (value >= a && value <= z)
+		return (1);
+	return (0);
 }

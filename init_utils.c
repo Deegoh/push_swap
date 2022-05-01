@@ -6,66 +6,26 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/30 15:23:21 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/01 21:35:00 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	error_exit(void)
+void	free_all_nodes(t_sck *stacks)
 {
-	ft_putstr_fd("Error\n", 1);
-	exit (EXIT_FAILURE);
-}
-
-// void	print_stacks(t_sck stacks, int nbr)
-// {
-// 	t_sck	tmp;
-// 	int		j;
-
-// 	tmp = stacks;
-// 	ft_printf("min[%d] max[%d]\n", stacks.min, stacks.max);
-// 	ft_printf("A size[%d] B size[%d]\n", stacks.size_a, stacks.size_b);
-// 	while ((tmp.a || tmp.b) && nbr--)
-// 	{
-// 		if (tmp.a)
-// 		{
-// 			j = ft_nbrlen(tmp.a->data);
-// 			ft_printf("a:");
-// 			while (j++ < 4)
-// 				ft_printf(" ");
-// 			ft_printf("%d ", tmp.a->data);
-// 			tmp.a = tmp.a->next;
-// 		}
-// 		else
-// 			ft_printf("a:     ");
-// 		if (tmp.b)
-// 		{
-// 			j = ft_nbrlen(tmp.b->data);
-// 			ft_printf("b:");
-// 			while (j++ < 4)
-// 				ft_printf(" ");
-// 			ft_printf("%d\n", tmp.b->data);
-// 			tmp.b = tmp.b->next;
-// 		}
-// 		else
-// 			ft_printf("b:\n");
-// 	}
-// }
-
-int	check_sort(t_sck stacks)
-{
-	stacks.a = stacks.a->next;
-	while (stacks.a && stacks.a->prev)
+	while (stacks->a && stacks->a->next)
 	{
-		if (stacks.a->prev->data < stacks.a->data)
-		{
-			stacks.a = stacks.a->next;
-			continue ;
-		}
-		return (1);
+		stacks->a = stacks->a->next;
+		free(stacks->a->prev);
 	}
-	return (0);
+	free(stacks->a);
+	while (stacks->b && stacks->b->next)
+	{
+		stacks->b = stacks->b->next;
+		free(stacks->b->prev);
+	}
+	free(stacks->b);
 }
 
 t_sck	init_list(t_stacks	stacks)
@@ -84,4 +44,20 @@ t_sck	init_list(t_stacks	stacks)
 	sck.max = find_max(&sck, 'A');
 	sck.min = find_min(&sck, 'A');
 	return (sck);
+}
+
+t_stacks	init_stacks(int ac, char **av)
+{
+	char		*arg;
+	char		**split;
+	t_stacks	stacks;
+
+	arg = merge_arg(av, ac);
+	split = ft_split(arg, ' ');
+	free(arg);
+	stacks.sizemax = arr_len(split);
+	stacks.a.value = split_to_arr(split, stacks.sizemax);
+	stacks.a.size = stacks.sizemax;
+	find_dup(stacks.a.value, stacks.a.size);
+	return (stacks);
 }

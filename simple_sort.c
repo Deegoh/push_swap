@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/28 13:13:17 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/01 16:46:51 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,9 @@ void	sort4(t_sck *stacks)
 
 void	sort5(t_sck *stacks)
 {
-	int		min;
-	t_node	*tmp;
-
-	min = stacks->a->data;
-	tmp = stacks->a;
-	while (tmp)
-	{
-		if (tmp->data < min)
-			min = tmp->data;
-		tmp = tmp->next;
-	}
-	opti_rot(stacks, min, 'A');
+	opti_rot(stacks, find_min(stacks, 'A'), 'A');
 	push_ab(stacks, 'B');
-	min = stacks->a->data;
-	tmp = stacks->a;
-	while (tmp)
-	{
-		if (tmp->data < min)
-			min = tmp->data;
-		tmp = tmp->next;
-	}
-	opti_rot(stacks, min, 'A');
+	opti_rot(stacks, find_min(stacks, 'A'), 'A');
 	push_ab(stacks, 'B');
 	sort3(stacks);
 	do_rule_nb(stacks, "PA", 2);

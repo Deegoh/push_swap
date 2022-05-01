@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:55:43 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/29 21:00:45 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/01 21:57:32 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ void	split_by_chunck(t_sck *s, int chunck)
 	}
 }
 
-int	is_between_value(int value, int a, int z)
-{
-	if (value >= a && value <= z)
-		return (1);
-	return (0);
-}
-
 int	data_in_range(t_sck *stacks, int a, int z, char c)
 {
 	int		i;
@@ -84,5 +77,34 @@ int	data_in_range(t_sck *stacks, int a, int z, char c)
 		if (i < j)
 			return (count_until_index(stacks->b, i, 'T')->data);
 		return (count_until_index(stacks->b, j, 'B')->data);
+	}
+}
+
+void	custom_sort(t_sck *s)
+{
+	split_by_chunck(s, s->size_a / 150);
+	s->count = 0;
+	s->range = 5 + (s->size_a / 100);
+	s->min = s->min - 1;
+	s->z = s->min + 1;
+	s->btn = 0;
+	while (s->size_a > 1)
+	{
+		while (s->count < s->range && s->size_a)
+		{
+			opti_rot(s, data_in_range(s, s->min, s->z + s->range, 'A'), 'A');
+			push_ab(s, 'B');
+			if (s->btn)
+				rotate(s, "RB");
+			s->count++;
+			s->z++;
+		}
+		s->count = 0;
+		s->btn = ft_bool(s->btn);
+	}
+	while (s->size_b)
+	{
+		opti_rot(s, find_max(s, 'B'), 'B');
+		push_ab(s, 'A');
 	}
 }
