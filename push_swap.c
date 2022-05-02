@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/01 23:21:12 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/02 19:09:29 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,23 @@ int	main(int ac, char *av[])
 	if (ac == 1)
 		return (EXIT_FAILURE);
 	stacks = init_list(init_stacks(ac, av));
-	stacks.op = ft_strdup("");
-	stacks.l_op = ft_strdup("");
 	if (check_sort(stacks))
 	{
 		if (stacks.size_a <= 5)
+		{
 			simple_sort(&stacks);
+		}
 		else
-			custom_sort(&stacks);
+		{
+			if (stacks.size_a <= 100)
+				custom_sort(&stacks, 1, 1);
+			else
+				custom_sort(&stacks, 2, 8);
+		}
 	}
 	join_op(&stacks, "");
 	ft_remove_str(stacks.op, "pb\npa\n");
 	ft_printf("%s", stacks.op);
-	free(stacks.l_op);
-	free(stacks.op);
-	free_all_nodes(&stacks);
+	free_all(&stacks);
 	return (EXIT_SUCCESS);
 }

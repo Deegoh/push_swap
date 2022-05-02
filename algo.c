@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:55:43 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/01 21:57:32 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/02 19:16:43 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	split_by_chunck(t_sck *s, int chunck)
 	int	mean;
 
 	if (chunck <= 1)
-		chunck = 2;
+		return ;
 	mean = get_mean(s, 'A');
 	len = s->size_a / chunck;
 	while (s->size_a > len)
@@ -80,11 +80,11 @@ int	data_in_range(t_sck *stacks, int a, int z, char c)
 	}
 }
 
-void	custom_sort(t_sck *s)
+void	custom_sort(t_sck *s, int chunck, int range)
 {
-	split_by_chunck(s, s->size_a / 150);
+	split_by_chunck(s, chunck);
 	s->count = 0;
-	s->range = 5 + (s->size_a / 100);
+	s->range = 5 + range;
 	s->min = s->min - 1;
 	s->z = s->min + 1;
 	s->btn = 0;

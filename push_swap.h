@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/01 23:22:08 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:05:27 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ void		append(t_node **head_ref, int new_data);
 void		delete_node(t_node **head_ref, t_node *del);
 t_node		*last_node(t_node *root);
 
-void		free_all_nodes(t_sck *stacks);
+void		free_all(t_sck *stacks);
 t_sck		init_list(t_stacks	stacks);
 t_stacks	init_stacks(int ac, char *av[]);
 
 int			get_mean(t_sck	*stacks, char c);
 void		split_by_chunck(t_sck *s, int chunck);
 int			data_in_range(t_sck *stacks, int a, int z, char c);
-void		custom_sort(t_sck *s);
+void		custom_sort(t_sck *s, int chunck, int range);
 
 #endif
