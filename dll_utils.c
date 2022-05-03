@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nodes_utils.c                                      :+:      :+:    :+:   */
+/*   dll_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:18:37 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/04/30 15:26:09 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:23:40 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_node **head_ref, int new_data)
+void	push(t_node **head_ref, int new_data, int i)
 {
 	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node->data = new_data;
+	new_node->i = i;
 	new_node->next = (*head_ref);
 	new_node->prev = NULL;
 	if ((*head_ref) != NULL)
@@ -27,7 +28,7 @@ void	push(t_node **head_ref, int new_data)
 
 /* Given a node as prev_node, insert a new node after the
  * given node */
-void	insert_after(t_node *prev_node, int new_data)
+void	insert_after(t_node *prev_node, int new_data, int i)
 {
 	t_node	*new_node;
 
@@ -39,6 +40,7 @@ void	insert_after(t_node *prev_node, int new_data)
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node->data = new_data;
 	new_node->next = prev_node->next;
+	new_node->i = i;
 	prev_node->next = new_node;
 	new_node->prev = prev_node;
 	if (new_node->next != NULL)
@@ -47,7 +49,7 @@ void	insert_after(t_node *prev_node, int new_data)
 
 /* Given a reference (pointer to pointer) to the head
    of a DLL and an int, appends a new node at the end  */
-void	append(t_node **head_ref, int new_data)
+void	append(t_node **head_ref, int new_data, int i)
 {
 	t_node	*new_node;
 	t_node	*last;
@@ -55,6 +57,7 @@ void	append(t_node **head_ref, int new_data)
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node->data = new_data;
 	new_node->next = NULL;
+	new_node->i = i;
 	if (*head_ref == NULL)
 	{
 		new_node->prev = NULL;

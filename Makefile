@@ -1,10 +1,16 @@
+#color
+GREEN = \e[32m
+RED = \e[31m
+WHITE = \e[39m
+YELLOW = \e[33m
+
 NAME = push_swap
 ifeq ($(shell uname),Darwin)
 	CHECKER = checker_Mac
 else
 	CHECKER = checker_linux
 endif
-CC = cc
+CC = gcc
 CFLAGS = -Werror -Wall -Wextra -g -fsanitize=address
 SRC = push_swap.c\
 	  print_utils.c\
@@ -22,7 +28,7 @@ RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
-ARG =`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`
+ARG =`ruby -e "puts (-4..5).to_a.shuffle.join(' ')"`
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re libft v1 v2 test run wc checker lldb
@@ -31,13 +37,22 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(MAKE) all -sC $(LIBFT_DIR)
-	$(CC) $(OBJ) $(LIB) $(INCLUDE) $(CFLAGS) -o $(NAME)
+	@$(CC) $(OBJ) $(LIB) $(INCLUDE) $(CFLAGS) -o $(NAME)
+	@printf "$(GREEN)🚀 Creating $(NAME)$(WHITE)\n"
+	@sleep 0.5
+
 clean:
-	$(RM) $(NAME)
-	$(RM) $(OBJ)
+	@$(RM) $(NAME)
+	@$(RM) $(OBJ)
+	@printf "$(YELLOW)♻️  Clean $(NAME)$(WHITE)\n"
+	@sleep 0.5
 	@$(MAKE) clean -sC $(LIBFT_DIR)
+
 fclean: clean
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
+	@printf "$(RED)🗑️  Remove $(NAME)$(WHITE)\n"
+	@sleep 0.5
+
 re: fclean all
 
 v1: all
@@ -54,7 +69,7 @@ run: all
 	./$(NAME) $(ARG)
 
 wc: all
-	./$(NAME) $(ARG) | wc -l >> wc.txt
+	./$(NAME) $(ARG) | wc -l
 
 checker: all
 	./$(NAME) $(ARG) | ./$(CHECKER) $(ARG)

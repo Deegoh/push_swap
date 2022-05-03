@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/03 18:10:33 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:24:15 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ void		swap_qs(int *a, int*b);
 int			partition(int arr[], int l, int h);
 void		quicksort(int arr[], int l, int h);
 
-long		ft_atol(const char *str);
-int			ft_bool(int btn);
-char		*ft_remove_str(char *str, const char *sub);
-
 void		sort2(t_sck *stacks);
 void		sort3(t_sck *stacks);
 void		sort4(t_sck *stacks);
@@ -94,9 +90,9 @@ int			find_max(t_sck *stacks, char c);
 int			find_min(t_sck *stacks, char c);
 t_node		*first_node(t_node *root);
 
-void		push(t_node **head_ref, int new_data);
-void		insert_after(t_node *prev_node, int new_data);
-void		append(t_node **head_ref, int new_data);
+void		push(t_node **head_ref, int new_data, int i);
+void		insert_after(t_node *prev_node, int new_data, int i);
+void		append(t_node **head_ref, int new_data, int i);
 void		delete_node(t_node **head_ref, t_node *del);
 t_node		*last_node(t_node *root);
 
