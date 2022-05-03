@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/02 19:09:29 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:09:08 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	main(int ac, char *av[])
 	if (ac == 1)
 		return (EXIT_FAILURE);
 	stacks = init_list(init_stacks(ac, av));
+	print_stacks(stacks, 500);
 	if (check_sort(stacks))
 	{
 		if (stacks.size_a <= 5)
@@ -89,7 +90,7 @@ int	main(int ac, char *av[])
 	}
 	join_op(&stacks, "");
 	ft_remove_str(stacks.op, "pb\npa\n");
-	ft_printf("%s", stacks.op);
+	// ft_printf("%s", stacks.op);
 	free_all(&stacks);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/02 18:05:27 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:10:33 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 typedef struct s_node
 {
 	int				data;
+	int				i;
 	struct s_node	*next;
 	struct s_node	*prev;
 }			t_node;
@@ -50,6 +51,10 @@ typedef struct s_stacks
 	int		min;
 	t_stack	a;
 }			t_stacks;
+
+void		swap_qs(int *a, int*b);
+int			partition(int arr[], int l, int h);
+void		quicksort(int arr[], int l, int h);
 
 long		ft_atol(const char *str);
 int			ft_bool(int btn);

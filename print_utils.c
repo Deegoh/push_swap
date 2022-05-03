@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:21:16 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/01 21:28:17 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:19:47 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,26 @@ void	print_nodes(t_node *a, t_node *b)
 		j = ft_nbrlen(b->data);
 		while (j++ < 4)
 			ft_printf(" ");
-		ft_printf("%d\n", b->data);
+		ft_printf("%d  |  ", b->data);
+	}
+	else
+		ft_printf("  |  ");
+	if (a)
+	{
+		j = ft_nbrlen(a->i);
+		ft_printf("a:");
+		while (j++ < 4)
+			ft_printf(" ");
+		ft_printf("%d b:", a->i);
+	}
+	else
+		ft_printf("a:     b:");
+	if (b)
+	{
+		j = ft_nbrlen(b->i);
+		while (j++ < 4)
+			ft_printf(" ");
+		ft_printf("%d\n", b->i);
 	}
 	else
 		ft_printf("\n");

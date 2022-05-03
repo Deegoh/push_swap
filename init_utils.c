@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/02 18:06:15 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:14:14 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,40 @@ void	free_all(t_sck *stacks)
 	free(stacks->op);
 }
 
+void	index_stack(t_sck	*sck, int arr[])
+{
+	// t_sck	*tmp;
+	// int		i;
+
+	// i = 0;
+	// tmp = sck->a;
+	// while (tmp)
+	// {
+	// 	tmp = tmp->a->next;
+	// }
+	(void)sck;
+	(void)arr;
+}
+
 t_sck	init_list(t_stacks	stacks)
 {
-	t_sck	sck;
-	int		i;
+	t_sck		sck;
+	int			i;
 
 	i = -1;
 	sck.a = NULL;
 	sck.b = NULL;
 	while (++i < stacks.a.size)
 		append(&sck.a, stacks.a.value[i]);
-	free(stacks.a.value);
 	sck.size_a = count_nodes(sck.a);
 	sck.size_b = 0;
 	sck.max = find_max(&sck, 'A');
 	sck.min = find_min(&sck, 'A');
 	sck.op = ft_strdup("");
 	sck.l_op = ft_strdup("");
+	quicksort(stacks.a.value, sck.min, sck.max);
+	index_stack(&sck, stacks.a.value);
+	free(stacks.a.value);
 	return (sck);
 }
 

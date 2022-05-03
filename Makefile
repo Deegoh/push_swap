@@ -15,13 +15,14 @@ SRC = push_swap.c\
 	  rules_node.c\
 	  op_utils.c\
 	  simple_sort.c\
-	  algo.c
+	  algo.c\
+	  quick_sort.c
 
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
-ARG =`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`
+ARG =`ruby -e "puts (1..10).to_a.shuffle.join(' ')"`
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re libft v1 v2 test run wc checker lldb
