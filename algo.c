@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:55:43 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/02 19:16:43 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/03 16:29:11 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	split_by_chunck(t_sck *s, int chunck)
 {
 	int	len;
 	int	mean;
+	int	max;
 
 	if (chunck <= 1)
 		return ;
@@ -49,6 +50,8 @@ void	split_by_chunck(t_sck *s, int chunck)
 	}
 	while (s->size_b)
 	{
+		max = find_max(s, 'B');
+		opti_rot(s, data_in_range(s, s->range - max, max, 'A'), 'B');
 		push_ab(s, 'A');
 	}
 }
