@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/03 23:31:37 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:43:17 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,18 @@ void	index_stack(t_sck	*sck, int arr[])
 {
 	t_node	*tmp;
 	int		i;
+	int		nw;
 
 	tmp = sck->a;
 	while (tmp)
 	{
+		nw = 0;
 		i = -1;
 		while (++i < sck->size_a)
 		{
 			if (tmp->data == arr[i])
-				tmp->i = i;
+				tmp->i = nw;
+			nw++;
 		}
 		tmp = tmp->next;
 	}
@@ -72,6 +75,7 @@ t_sck	init_list(t_stacks	stacks)
 		append(&sck.a, stacks.a.value[i], -1);
 	sck.size_a = count_nodes(sck.a);
 	sck.size_b = 0;
+	sck.range = 0;
 	sck.max = find_max(&sck, 'A');
 	sck.min = find_min(&sck, 'A');
 	sck.op = ft_strdup("");

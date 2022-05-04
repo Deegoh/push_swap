@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/03 23:24:15 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 16:55:54 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_stacks
 	t_stack	a;
 }			t_stacks;
 
+int			count_char(char *str, char c);
+
 void		swap_qs(int *a, int*b);
 int			partition(int arr[], int l, int h);
 void		quicksort(int arr[], int l, int h);
@@ -68,7 +70,7 @@ void		push_ab(t_sck *stacks, char c);
 void		check_rule(t_sck *stacks, char *str);
 int			do_rule_nb(t_sck *stacks, char *str, int nb);
 
-void		print_nodes(t_node *a, t_node *b);
+void		print_nodes(t_node *a, t_node *b, int i);
 void		print_stacks(t_sck s, int nbr);
 void		error_exit(void);
 

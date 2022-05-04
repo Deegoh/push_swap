@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:23:55 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/02 18:03:29 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:14:42 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	opti_rot(t_sck *stacks, int value, char c)
 		tmp = stacks->a;
 	else if (c == 'B')
 		tmp = stacks->b;
-	while (tmp && value != tmp->data)
+	while (tmp && value != tmp->i)
 	{
 		tmp = tmp->next;
 		i++;
@@ -78,7 +78,7 @@ int	find_opti_top(t_sck *stacks, int a, int z, char c)
 		tmp = stacks->b;
 	while (tmp)
 	{
-		if (is_between_value(tmp->data, a, z))
+		if (is_between_value(tmp->i, a, z))
 			break ;
 		tmp = tmp->next;
 		i++;
@@ -99,7 +99,7 @@ int	find_opti_bot(t_sck *stacks, int a, int z, char c)
 		tmp = last_node(stacks->b);
 	while (tmp)
 	{
-		if (is_between_value(tmp->data, a, z))
+		if (is_between_value(tmp->i, a, z))
 			break ;
 		tmp = tmp->prev;
 		i++;

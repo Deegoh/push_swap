@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 20:03:09 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/01 21:40:06 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:12:46 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	find_max(t_sck *stacks, char c)
 		tmp = stacks->a;
 	else
 		tmp = stacks->b;
-	value = tmp->data;
+	value = -1;
 	while (tmp)
 	{
-		if (value < tmp->data)
-			value = tmp->data;
+		if (value < tmp->i)
+			value = tmp->i;
 		tmp = tmp->next;
 	}
 	tmp = first_node(tmp);
@@ -74,11 +74,11 @@ int	find_min(t_sck *stacks, char c)
 		tmp = stacks->a;
 	else
 		tmp = stacks->b;
-	value = tmp->data;
+	value = INT_MAX;
 	while (tmp)
 	{
-		if (value > tmp->data)
-			value = tmp->data;
+		if (value > tmp->i)
+			value = tmp->i;
 		tmp = tmp->next;
 	}
 	tmp = first_node(tmp);

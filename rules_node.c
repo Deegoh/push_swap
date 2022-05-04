@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 17:34:05 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/03 23:28:37 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:23:15 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	push_ab(t_sck *stacks, char c)
 		stacks->size_b++;
 		join_op(stacks, "pb\n");
 	}
+	// print_stacks(*stacks, 10);
+	// sleep(1);
 }
 
 void	check_rule(t_sck *stacks, char *str)
@@ -100,12 +102,16 @@ int	do_rule_nb(t_sck *stacks, char *str, int nb)
 {
 	int	ret;
 
-	ret = nb;
 	if (nb < 0)
 		nb = -nb;
+	ret = nb;
 	if (nb == 0)
 		return (0);
 	while (nb--)
+	{
 		check_rule(stacks, str);
+		// print_stacks(*stacks, 10);
+		// sleep(1);
+	}
 	return (ret);
 }

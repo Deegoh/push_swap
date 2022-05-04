@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:21:16 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/03 23:19:12 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:37:25 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,24 @@ void	print_index(t_node *a, t_node *b)
 		ft_printf("\n");
 }
 
-void	print_nodes(t_node *a, t_node *b)
+void	print_nodes(t_node *a, t_node *b, int i)
 {
 	int	j;
 
 	if (a)
 	{
+		j = ft_nbrlen(i);
+		ft_printf("%i", i);
+		while (j++ < 4)
+			ft_printf(" ");
+		ft_printf("|  a:");
 		j = ft_nbrlen(a->data);
-		ft_printf("a:");
 		while (j++ < 4)
 			ft_printf(" ");
 		ft_printf("%d b:", a->data);
 	}
 	else
-		ft_printf("a:     b:");
+		ft_printf("%i a:     b:", i);
 	if (b)
 	{
 		j = ft_nbrlen(b->data);
@@ -65,14 +69,17 @@ void	print_nodes(t_node *a, t_node *b)
 		ft_printf("%d  |  ", b->data);
 	}
 	else
-		ft_printf("  |  ");
+		ft_printf("      |  ");
 }
 
 void	print_stacks(t_sck s, int nbr)
 {
+	int	i;
+
+	i = 1;
 	while ((s.a || s.b) && nbr--)
 	{
-		print_nodes(s.a, s.b);
+		print_nodes(s.a, s.b, i++);
 		print_index(s.a, s.b);
 		if (s.a)
 			s.a = s.a->next;

@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:18:37 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/03 23:23:40 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 11:24:55 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	insert_after(t_node *prev_node, int new_data, int i)
 	}
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node->data = new_data;
-	new_node->next = prev_node->next;
 	new_node->i = i;
+	new_node->next = prev_node->next;
 	prev_node->next = new_node;
 	new_node->prev = prev_node;
 	if (new_node->next != NULL)
@@ -56,8 +56,8 @@ void	append(t_node **head_ref, int new_data, int i)
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	new_node->data = new_data;
-	new_node->next = NULL;
 	new_node->i = i;
+	new_node->next = NULL;
 	if (*head_ref == NULL)
 	{
 		new_node->prev = NULL;
