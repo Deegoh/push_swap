@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 20:03:09 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/04 17:12:46 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 20:37:02 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_node	*count_until_index(t_node *root, int index, char c)
 		tmp = root;
 	else
 		tmp = last_node(root);
-	if (!tmp)
-		return (NULL);
+	// if (!tmp)
+	// 	return (NULL);
 	while (tmp && index--)
 	{
 		if (c == 'T')

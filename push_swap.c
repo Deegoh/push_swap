@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:03:38 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/04 18:24:14 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/04 21:52:53 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,44 +72,49 @@ int	main(int ac, char *av[])
 		}
 		else
 		{
-			if (stacks.size_a <= 100)
-			{
+			// if (stacks.size_a <= 99)
+			// {
 				// print_stacks(stacks, 500);
+				// opti_rot(&stacks, 46, 'A');
+				// printf("in_r[%d]\n", data_in_range(&stacks, 51, 52, 'A'));
+				// print_stacks(stacks, 500);
+
 				// split_by_chunck(&stacks, 2, 0);
 				// print_stacks(stacks, 500);
-				custom_sort(&stacks, 1, 5);
-			}
-			else
-			{
-				chunck = 3;
-				// while (chunck <= 250)
-				// {
-					range = 30;
-					// while (range <= 250)
-					// {
-						split_by_chunck(&stacks, chunck);
-						// custom_sort(&stacks, chunck, range);
+				// custom_sort(&stacks, 1, 5);
+			// }
+			// else
+			// {
+				chunck = 1;
+				while (chunck <= 3)
+				{
+					range = 1;
+					while (range <= 150)
+					{
+						// split_by_chunck(&stacks, chunck);
+						custom_sort(&stacks, chunck, range);
 						join_op(&stacks, "");
 						ft_remove_str(stacks.op, "pb\npa\n");
 						// if (10000 >= count_char(stacks.op, '\n'))
-						// printf("op[%d] range[%d] chunck[%d]\n", count_char(stacks.op, '\n'), range, chunck);
-						// free_all(&stacks);
-						// stacks = dup_stack(dup);
-						// range++;
-					// }
-					// chunck++;
-					// printf("new chunck %d\n", chunck);
-				// }
+						printf("op[%d] range[%d] chunck[%d] size[%d]\n", count_char(stacks.op, '\n'), range, chunck, stacks.size_a);
+						free_all(&stacks);
+						stacks = dup_stack(dup);
+						range++;
+					}
+					chunck++;
+					printf("new chunck %d\n", chunck);
+				}
 
-			}
+			// }
 		}
 	}
 	// join_op(&stacks, "");
 	// ft_remove_str(stacks.op, "pb\npa\n");
-	ft_printf("%s", stacks.op);
+	// ft_printf("%s", stacks.op);
 	// print_stacks(stacks, 500);
 	// print_stacks(dup, 500);
 	(void)range;
 	free_all(&stacks);
+	free_all(&dup);
 	return (EXIT_SUCCESS);
 }
