@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:55:43 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/04 21:56:54 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:49:15 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,50 +33,91 @@ int	get_mean(t_sck	*stacks, char c)
 	return (value / i);
 }
 
+int	in_range(t_sck *s, int a, int z, char c)
+{
+	int		i;
+	int		j;
+	t_node	*tmp;
+
+	if (c == 'A')
+		tmp = s->a;
+	else
+		tmp = s->b;
+	i = find_opti_top(s, a, z, c);
+	j = find_opti_bot(s, a, z, c);
+	if (i > j)
+	{
+		return (count_until_index(s->a, j, 'B')->i);
+	}
+	return (count_until_index(s->a, i, 'T')->i);
+}
+
+// int	in_range_b(t_sck *s, int a, int z, char c)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = find_opti_top(s, a, z, c);
+// 	j = find_opti_bot(s, a, z, c);
+// 	if (i > j)
+// 	{
+// 		return (count_until_index(s->b, j, 'B')->i);
+// 	}
+// 	return (count_until_index(s->b, i, 'T')->i);
+// }
+
 void	split_by_chunck(t_sck *s, int chunck)
 {
 	int	len;
 	int	max;
 	int	mean;
+	int	count;
 
 	if (chunck == 2)
 	{
-		len = s->size_a / chunck;
+		len = get_mean(s, 'A');
 		max = len;
 		while (max--)
 		{
-			opti_rot(s, data_in_range(s, 0, len, 'A'), 'A');
+			opti_rot(s, in_range(s, 1, len, 'A'), 'A');
 			push_ab(s, 'B');
 		}
+		// count = 0;
 		while (s->size_b)
 		{
 			push_ab(s, 'A');
-			rotate(s, "RA");
+			// if (count)
+			// 	rotate(s, "RA");
+			// count = ft_bool(count);
 		}
 	}
 	else if (chunck == 3)
 	{
-
 		len = s->size_a - s->size_a / chunck;
 		max = len;
 		while (max--)
 		{
-			opti_rot(s, data_in_range(s, 0, len, 'A'), 'A');
+			opti_rot(s, in_range(s, 0, len, 'A'), 'A');
 			push_ab(s, 'B');
 		}
 		len = s->size_b / (chunck - 1);
 		max = s->size_b;
 		mean = len;
-		while (--len)
+		count = 0;
+		while (len--)
 		{
-			opti_rot(s, data_in_range(s, mean, max, 'B'), 'B');
+			opti_rot(s, in_range(s, mean, max, 'B'), 'B');
 			push_ab(s, 'A');
-			rotate(s, "RA");
+			if (count++ < len)
+				rotate(s, "RA");
 		}
+		count = 0;
 		while (s->size_b)
 		{
 			push_ab(s, 'A');
-			rotate(s, "RA");
+			if (count)
+				rotate(s, "RA");
+			count = ft_bool(count);
 		}
 	}
 }
@@ -84,7 +125,6 @@ void	split_by_chunck(t_sck *s, int chunck)
 int	get_index(t_node *root, int index, char c)
 {
 	t_node	*tmp;
-	int		tmpi;
 
 	if (c == 'T')
 		tmp = root;
@@ -94,7 +134,6 @@ int	get_index(t_node *root, int index, char c)
 	{
 		return (INT_MIN);
 	}
-	tmpi = index;
 	while (tmp && index--)
 	{
 		if (c == 'T')
@@ -102,7 +141,6 @@ int	get_index(t_node *root, int index, char c)
 		else
 			tmp = tmp->prev;
 	}
-	printf("node.d[%d] node.i[%d] i[%d] c[%c]\n", tmp->data, tmp->i, tmpi, c);
 	return (tmp->i);
 }
 
@@ -112,11 +150,15 @@ int	data_in_range(t_sck *stacks, int a, int z, char c)
 	int		j;
 
 	if (a > z)
-		swap_qs(&a, &z);
-	if (a < find_min(stacks, c) || a > find_max(stacks, c))
-		a = find_min(stacks, c);
-	if (z > find_max(stacks, c) || z < find_max(stacks, c))
-		z = find_max(stacks, c);
+		return (0);
+	// if (is_between_value())
+		// swap_qs(&a, &z);
+	// if (a < find_min(stacks, c))
+		// return (0);
+	// 	a = find_min(stacks, c);
+	// if (z >= find_max(stacks, c))
+		// return (0);
+	// 	z = find_max(stacks, c);
 	if (c == 'A')
 	{
 		i = find_opti_top(stacks, a, z, c);
@@ -127,10 +169,13 @@ int	data_in_range(t_sck *stacks, int a, int z, char c)
 			return (stacks->a->i);
 		if (i <= j)
 		{
-			// printf("i[%d] j[%d]\n", i, j);
+			if (is_between_value(count_until_index(stacks->a, i, 'T')->i, a, z))
+				return (0);
 			return (count_until_index(stacks->a, i, 'T')->i);
 		}
 		// printf("i[%d] j[%d]\n", i, j);
+		if (is_between_value(count_until_index(stacks->a, j, 'B')->i, a, z))
+				return (0);
 		return (count_until_index(stacks->a, j, 'B')->i);
 	}
 	else
@@ -149,35 +194,48 @@ int	data_in_range(t_sck *stacks, int a, int z, char c)
 void	custom_sort(t_sck *s, int chunck, int range)
 {
 	split_by_chunck(s, chunck);
-	// s->range = range;
+	s->count = 0;
+	s->range = 5 + range;
+	s->min = s->min - 1;
+	s->z = s->min + 1;
+	s->btn = 0;
+	while (s->size_a)
+	{
+		while (s->count < s->range && s->size_a)
+		{
+			opti_rot(s, in_range(s, s->min, s->z + s->range, 'A'), 'A');
+			push_ab(s, 'B');
+			if (s->btn)
+				rotate(s, "RB");
+			s->count++;
+			s->z++;
+			if (count_char(s->op, '\n') > 7000 || (count_char(s->op, '\n') > 900 && s->sizemax <= 100))
+				return ;
+		}
+		s->count = 0;
+		s->btn = ft_bool(s->btn);
+		if (count_char(s->op, '\n') > 7000 || (count_char(s->op, '\n') > 900 && s->sizemax <= 100))
+			return ;
+	}
+	while (s->size_b)
+	{
+		opti_rot(s, find_max(s, 'B'), 'B');
+		push_ab(s, 'A');
+		if (count_char(s->op, '\n') > 7000 || (count_char(s->op, '\n') > 900 && s->sizemax <= 100))
+			return ;
+	}
+
 	// s->btn = 0;
 	// while (s->size_a)
 	// {
-	// 	if (s->count % 10 == 0)
-	// 		s->btn = ft_bool(s->btn);
-	// 	opti_rot(s, data_in_range(s, find_min(s, 'A'), find_min(s, 'A') + range, 'A'), 'A');
-	// 	push_ab(s, 'B');
-	// 	if (s->btn)
-	// 		rotate(s, "RB");
-	// 	s->count++;
-	// 	s->z++;
-		// if (10000 < count_char(s->op, '\n'))
-		// 	return ;
-	// }
-	// s->range = range;
-	// s->z = 0;
-	// s->btn = 0;
-	// while (s->size_a > 1)
-	// {
 	// 	s->count = 0;
-	// 	while (s->count < 10 && s->size_a && s->z + s->range <= s->size_a)
+	// 	while (s->count < 10)
 	// 	{
-	// 		opti_rot(s, data_in_range(s, s->z * 10, (s->z + range) * 10, 'A'), 'A');
+	// 		opti_rot(s, find_min(s, 'A'), 'A');
 	// 		push_ab(s, 'B');
-	// 		if (s->btn)
-	// 			rotate(s, "RB");
+	// 		// if (s->btn)
+	// 		// 	rotate(s, "RB");
 	// 		s->count++;
-	// 		s->z++;
 	// 	}
 	// 	s->btn = ft_bool(s->btn);
 	// }
@@ -185,28 +243,6 @@ void	custom_sort(t_sck *s, int chunck, int range)
 	// {
 	// 	opti_rot(s, find_max(s, 'B'), 'B');
 	// 	push_ab(s, 'A');
-	// 	// if (10000 < count_char(s->op, '\n'))
-	// 	// 	return ;
 	// }
-
-	s->btn = 0;
-	while (s->size_a)
-	{
-		s->count = 0;
-		while (s->count < 10)
-		{
-			opti_rot(s, find_min(s, 'A'), 'A');
-			push_ab(s, 'B');
-			// if (s->btn)
-			// 	rotate(s, "RB");
-			s->count++;
-		}
-		s->btn = ft_bool(s->btn);
-	}
-	while (s->size_b)
-	{
-		opti_rot(s, find_max(s, 'B'), 'B');
-		push_ab(s, 'A');
-	}
 	(void)range;
 }

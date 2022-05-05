@@ -272,7 +272,7 @@ class PSVizConfig:
     
     CMD_TIMEOUT_MIN = 10
     CMD_TIMEOUT_MAX = 1024
-    CMD_TIMEOUT     = 12
+    CMD_TIMEOUT     = 60
 
     STACK_GEN_MIN   = 0
     STACK_GEN_MAX   = 100

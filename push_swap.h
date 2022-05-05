@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/04 16:55:54 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:26:35 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_sck
 {
 	int		size_a;
 	int		size_b;
+	int		sizemax;
 	int		max;
 	int		min;
 	int		z;
