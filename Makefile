@@ -24,14 +24,14 @@ SRC = push_swap.c\
 	  op_utils.c\
 	  simple_sort.c\
 	  algo.c\
-	  quick_sort.c
+	  quick_sort.c\
+	  chunck_utils.c
 
 RM = rm -f
 LIBFT_DIR = ./libft/
 INCLUDE = -I$(LIBFT_DIR)
 LIB = -lft -L$(LIBFT_DIR)
-ARG =`ruby -e "puts (0..99).to_a.shuffle.join(' ')"`
-# ARG =`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`
+ARG =`ruby -e "puts (-49..50).to_a.shuffle.join(' ')"`
 OBJ = $(SRC:.c=.o)
 
 .PHONY: all clean fclean re libft v1 v2 test run wc checker lldb
@@ -41,23 +41,20 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(MAKE) all -sC $(LIBFT_DIR)
 	@$(CC) $(OBJ) $(LIB) $(INCLUDE) $(CFLAGS) -o $(NAME)
-	@printf "\r$(GREEN)🚀 Creating $(NAME)$(RESET)\n"
+	@printf "$(GREEN)🚀 Creating $(NAME)$(RESET)\n"
 	@sleep 0.5
-	@printf "\r$(HIDDEN)🚀 Creating $(NAME)$(RESET)\r"
 
 clean:
 	@$(RM) $(NAME)
 	@$(RM) $(OBJ)
-	@printf "\r$(YELLOW)♻️  Clean $(NAME)$(RESET)\n"
+	@printf "$(YELLOW)♻️  Clean $(NAME)$(RESET)\n"
 	@sleep 0.5
-	@printf "\r$(HIDDEN)♻️  Clean $(NAME)$(RESET)\r"
 	@$(MAKE) clean -sC $(LIBFT_DIR)
 
 fclean: clean
 	@$(MAKE) fclean -sC $(LIBFT_DIR)
 	@printf "\r$(RED)🗑️  Remove $(NAME)$(RESET)\n"
 	@sleep 0.5
-	@printf "\r$(HIDDEN)🗑️  Remove $(NAME)$(RESET)\r"
 
 re: fclean all
 
@@ -67,7 +64,7 @@ v1: all
 v2: all
 	./push_swap_visualizer2.py --min 1 --max 10000 --size 500
 
-test: all
+test:
 	cp $(NAME) ../push_swap_tester/.
 	bash ../push_swap_tester/tester.sh
 

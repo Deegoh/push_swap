@@ -6,11 +6,19 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:50:56 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/05 18:27:44 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:41:51 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_to_long(t_sck *s)
+{
+	if (count_c(s->op, '\n') > 7000
+		|| (count_c(s->op, '\n') > 900 && s->sizemax <= 100))
+		return (1);
+	return (0);
+}
 
 void	free_all(t_sck *stacks)
 {
@@ -28,18 +36,6 @@ void	free_all(t_sck *stacks)
 	free(stacks->b);
 	free(stacks->l_op);
 	free(stacks->op);
-}
-
-void	print_arr(int arr[], int n)
-{
-	int	i;
-
-	i = -1;
-	while (i++ < n)
-	{
-		printf("%d ", arr[i]);
-	}
-	printf("\n");
 }
 
 void	index_stack(t_sck	*sck, int arr[])
@@ -81,6 +77,7 @@ t_sck	init_list(t_stacks	stacks)
 	sck.min = find_min(&sck, 'A');
 	sck.op = ft_strdup("");
 	sck.l_op = ft_strdup("");
+	sck.btn = 0;
 	quicksort(stacks.a.value, 0, sck.size_a - 1);
 	index_stack(&sck, stacks.a.value);
 	free(stacks.a.value);

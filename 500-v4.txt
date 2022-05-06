@@ -1,17 +1,0 @@
-gcc -Werror -Wall -Wextra -g -fsanitize=address   -c -o algo.o algo.c
-[32m🚀 Creating push_swap[0m
-[8m🚀 Creating push_swap[0m./push_swap `ruby -e "puts (1..500).to_a.shuffle.join(' ')"`
-op[8005] range[49] chunck[3] size[342]
-op[8002] range[43] chunck[3] size[368]
-op[8000] range[37] chunck[3] size[405]
-op[7991] range[27] chunck[3] size[500]
-op[7950] range[25] chunck[3] size[500]
-op[7891] range[24] chunck[3] size[500]
-op[7700] range[23] chunck[3] size[500]
-op[7675] range[21] chunck[3] size[500]
-op[7585] range[20] chunck[3] size[500]
-op[6934] range[18] chunck[3] size[500]
-op[6773] range[20] chunck[2] size[500]
-op[6600] range[15] chunck[2] size[500]
-op[6492] range[14] chunck[2] size[500]
-op[6467] range[12] chunck[2] size[500]

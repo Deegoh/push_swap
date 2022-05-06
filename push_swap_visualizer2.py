@@ -268,7 +268,7 @@ class PSVizConfig:
     
     APP_DESC        = "Push Swap Visualizer"
 
-    PUSH_SWAP_PATH  = "./push_swap"
+    PUSH_SWAP_PATH  = "./ps"
     
     CMD_TIMEOUT_MIN = 10
     CMD_TIMEOUT_MAX = 1024

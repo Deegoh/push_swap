@@ -1,30 +1,0 @@
-gcc -Werror -Wall -Wextra -g -fsanitize=address   -c -o push_swap.o push_swap.c
-[32m🚀 Creating push_swap[0m
-[8m🚀 Creating push_swap[0m./push_swap `ruby -e "puts (1..500).to_a.shuffle.join(' ')"`
-op[9932] range[48] chunck[3] size[500]
-op[9749] range[46] chunck[3] size[500]
-op[9641] range[44] chunck[3] size[500]
-op[9459] range[42] chunck[3] size[500]
-op[9386] range[41] chunck[3] size[500]
-op[9039] range[36] chunck[3] size[500]
-op[8891] range[35] chunck[3] size[500]
-op[8875] range[34] chunck[3] size[500]
-op[8675] range[32] chunck[3] size[500]
-op[8583] range[31] chunck[3] size[500]
-op[8439] range[30] chunck[3] size[500]
-op[8422] range[29] chunck[3] size[500]
-op[8411] range[28] chunck[3] size[500]
-op[8290] range[27] chunck[3] size[500]
-op[8200] range[26] chunck[3] size[500]
-op[8066] range[25] chunck[3] size[500]
-op[7878] range[22] chunck[3] size[500]
-op[7850] range[21] chunck[3] size[500]
-op[7841] range[19] chunck[3] size[500]
-op[7516] range[18] chunck[3] size[500]
-op[7439] range[17] chunck[3] size[500]
-op[7267] range[15] chunck[3] size[500]
-op[7265] range[25] chunck[2] size[500]
-op[7207] range[22] chunck[2] size[500]
-op[6766] range[20] chunck[2] size[500]
-op[6648] range[18] chunck[2] size[500]
-op[6407] range[15] chunck[2] size[500]

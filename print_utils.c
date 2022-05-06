@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:21:16 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/05 12:12:23 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:44:25 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	error_exit(void)
 	exit (EXIT_FAILURE);
 }
 
-void	print_index(t_node *a, t_node *b, int i, int j)
+void	print_a(t_node *a, int i)
 {
 	int	k;
 
@@ -36,6 +36,12 @@ void	print_index(t_node *a, t_node *b, int i, int j)
 	}
 	else
 		ft_printf(":a b:");
+}
+
+void	print_b(t_node *b, int j)
+{
+	int	k;
+
 	if (b)
 	{
 		k = ft_nbrlen(b->i);
@@ -46,36 +52,6 @@ void	print_index(t_node *a, t_node *b, int i, int j)
 	else
 		ft_printf("    |");
 	ft_printf("%d\n", j);
-	(void)i;
-}
-
-void	print_nodes(t_node *a, t_node *b, int i)
-{
-	int	j;
-
-	if (a)
-	{
-		j = ft_nbrlen(i);
-		while (j++ < 4)
-			ft_printf(" ");
-		ft_printf("%i", i);
-		ft_printf("|a:");
-		j = ft_nbrlen(a->data);
-		while (j++ < 7)
-			ft_printf(" ");
-		ft_printf("%d b:", a->data);
-	}
-	else
-		ft_printf("%i a:     b:", i);
-	if (b)
-	{
-		j = ft_nbrlen(b->data);
-		while (j++ < 7)
-			ft_printf(" ");
-		ft_printf("%d!  ", b->data);
-	}
-	else
-		ft_printf("       !  ");
 }
 
 void	print_stacks(t_sck s, int nbr)
@@ -91,8 +67,8 @@ void	print_stacks(t_sck s, int nbr)
 		j = nbr;
 	while ((s.a || s.b) && nbr--)
 	{
-		// print_nodes(s.a, s.b, i++);
-		print_index(s.a, s.b,i++, j--);
+		print_a(s.a, i++);
+		print_b(s.b, j--);
 		if (s.a)
 			s.a = s.a->next;
 		if (s.b)

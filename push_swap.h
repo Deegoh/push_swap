@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 20:56:53 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/05 18:26:35 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/06 11:35:50 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_sck
 	int		btn;
 	char	*op;
 	char	*l_op;
+	char	*b_op;
 	t_node	*a;
 	t_node	*b;
 }			t_sck;
@@ -53,7 +54,8 @@ typedef struct s_stacks
 	t_stack	a;
 }			t_stacks;
 
-int			count_char(char *str, char c);
+int			is_to_long(t_sck *s);
+int			count_c(char *str, char c);
 
 void		swap_qs(int *a, int*b);
 int			partition(int arr[], int l, int h);
@@ -105,7 +107,7 @@ t_stacks	init_stacks(int ac, char *av[]);
 
 int			get_mean(t_sck	*stacks, char c);
 void		split_by_chunck(t_sck *s, int chunck);
-int			data_in_range(t_sck *stacks, int a, int z, char c);
+int			in_range(t_sck *s, int a, int z, char c);
 void		custom_sort(t_sck *s, int chunck, int range);
 
 #endif

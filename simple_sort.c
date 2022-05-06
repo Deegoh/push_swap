@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 14:14:39 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/01 16:46:51 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/06 10:30:43 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,6 @@ void	simple_sort(t_sck *stacks)
 		sort4(stacks);
 	else if (stacks->size_a == 5)
 		sort5(stacks);
+	join_op(stacks, "");
+	ft_remove_str(stacks->op, "pb\npa\n");
 }
