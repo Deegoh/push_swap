@@ -6,7 +6,7 @@
 /*   By: tpinto-m <marvin@24lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 16:55:43 by tpinto-m          #+#    #+#             */
-/*   Updated: 2022/05/06 11:27:46 by tpinto-m         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:47:00 by tpinto-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int	in_range(t_sck *s, int a, int z, char c)
 	j = find_opti_bot(s, a, z, c);
 	if (i > j)
 	{
-		return (count_until_index(s->a, j, 'B')->i);
+		return (count_until_index(tmp, j, 'B')->i);
 	}
-	return (count_until_index(s->a, i, 'T')->i);
+	return (count_until_index(tmp, i, 'T')->i);
 }
 
 int	get_index(t_node *root, int index, char c)
